@@ -1,0 +1,5 @@
+@charset "ISO-8859-1";
+.page .nav .justify-content-center .page-item a #activeq:active{
+	background-color:blue;
+	font-weight: bold;
+}
