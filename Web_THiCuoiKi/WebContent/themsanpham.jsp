@@ -28,6 +28,7 @@
 	href="/assets/owlcarousel/assets/owl.theme.default.min.css">
 <script src="/assets/vendors/jquery.min.js"></script>
 <script src="/assets/owlcarousel/owl.carousel.js"></script>
+<link rel="stylesheet" href="css-jsp/add.css">
 <title>Trang chủ</title>
 </head>
 <body>
@@ -130,48 +131,83 @@
 						<li class="nav-item "><a class="nav-link active text-white linkl" aria-current="page" href="HomeController">Trang chủ</a></li>
 						<li class="nav-item"><a class="nav-link text-white linkl" href="khachhangcontroller">Khách hàng</a></li>
 						<li class="nav-item"><a class="nav-link text-white linkl" href="xacnhandonhangController">Xác nhận đơn hàng</a></li>
-						<li class="nav-item"><a class="nav-link text-white linkl" href="themsanpham.jsp">Thêm sản phẩm</a></li>
+						<li class="nav-item"><a class="nav-link text-white linkl" href="themsanphamController">Thêm sản phẩm</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</section>
-	<section class="mymaincontent my-3">
-		<div class="container">
-      <div class="slider mb-3">
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-              aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-              aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-              aria-label="Slide 3"></button>
-          </div>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="image/slider_1.webp" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="image/slider_1.webp" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="image/slider_1.webp" class="d-block w-100" alt="...">
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-          </div>
-        </div>
-      </div>
+	<section class="form-add">
+		<div class="container1">
+	      <h1 class="form-title">THÊM SẢN PHẨM MỚI</h1>
+	      <form action="themsanphamController" method="post">
+	        <div class="main-user-info">
+		      <div class="user-input-box">
+		          <label for="email">Tên loại diện thoại</label>
+		          <select name="maloai" id="disabledSelect" class="form-select">
+				      <option>Chọn hãng điên thoại</option>
+				      <c:forEach items="${dsloai}" var="o">
+				      <option value="${o.maloai}">${o.tenloai}</option>
+				      </c:forEach>
+				   </select>
+		      </div>
+	          <div class="user-input-box">
+	            <label >Mã điện thoại</label>
+	            <input type="text" id="fullName" required name="madt" value="${madt}"  placeholder="Nhập mã điện thoại">
+	          </div>
+	          <div class="user-input-box">
+	            <label >Tên điện thoại</label>
+	            <input type="text" id="username" required name="tendt" value="${tendt}" placeholder="Nhập tên điện thoại">
+	          </div>
+	          <div class="user-input-box">
+	            <label >Giá điện thoại</label>
+	            <input type="number"  id="password" required name="gia" value="${gia}" placeholder="Nhập giá điện thoại">
+	          </div>
+	          <div class="user-input-box">
+	            <label >Kích thước màn</label>
+	            <input type="text"  name="kichthuocman" required value="${kichthuocman}" placeholder="Nhập kích thước màn"/>
+	          </div>
+	          <div class="user-input-box">
+	            <label >Dung lượng pin</label>
+	            <input type="number"  name="pin" required value="${pin}" placeholder="Nhập dung lượng pin"/>
+	          </div>
+	          <div class="user-input-box">
+	            <label >Chip</label>
+	            <input type="text"  name="chip" required value="${chip}" placeholder="Nhập loại chip"/>
+	          </div>
+	          <div class="user-input-box">
+	            <label >Ram</label>
+	            <input type="number"  name="ram" required value="${ram}" placeholder="Nhập dung lượng ram"/>
+	          </div>
+	          <div class="user-input-box">
+	            <label >Dung lượng bộ nhớ</label>
+	            <input type="number"  name="dungluong" required value="${dungluong}" placeholder="Nhập dung lượng bộ nhớ"/>
+	          </div>
+	          <div class="user-input-box">
+	            <label >Số lượng</label>
+	            <input type="number"  id="phoneNumber" required name="soluong" value="${soluong}" placeholder="Nhập số lượng">
+	          </div>
+	          <div class="user-input-box">
+	            <label >Hình ảnh</label>
+	            <input type="text" id="username" required name="hinhanh" value="${hinhanh}" placeholder="Nhập link hình ảnh">
+	          
+	        </div>
+	        <c:if test="${trung!=null}">
+	        	<p class="text-white text-uppercase">Trùng mã sách!Vui lòng chọn mã sách khác.</p>
+	        </c:if>
+	        <c:if test="${add!=null}">
+	       		<p class="text-white text-uppercase">Thêm sản phẩm thành công!</p>
+	       	</c:if>
+	        </div>
+	          <div class="form-submit-btn">
+		          <div class="d-grid gap-2">
+					  <button class="btn btn-success" type="submit">Thêm sản phẩm</button>
+					  
+				 </div>
+	        </div>
+	      </form>
+	    </div>
 	</section>
+
 </body>
 </html>

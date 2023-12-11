@@ -115,7 +115,7 @@
 			<div class="row">
 				<div class="col-md-3">
 					<div class="dropdown navbar navbar-light bg-danger">
-			            <a class="text-decoration-none text-white fs-5 mt-1 dropdown-toggle bg-danger border-0" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+			            <a class="text-decoration-none text-white fs-5 mt-1 dropdown-toggle bg-danger border-0" href="LichSuMuaHangController" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
 			              <i class="fa-solid fa-layer-group"></i>
 			              Danh mục sản phẩm
 			            </a>

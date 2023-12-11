@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import dao.giohangdao;
 
@@ -32,20 +33,24 @@ public class XoaSuaController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			HttpSession sesion = request.getSession();
-			giohangdao ghdao = (giohangdao)sesion.getAttribute("gh");
+			HttpSession session = request.getSession();
+			giohangdao ghdao = (giohangdao)session.getAttribute("gh");
 			String[] cong = request.getParameterValues("cong");
 			String tru = request.getParameter("tru");
 			String[] xoa = request.getParameterValues("xoa");
 			String[] xoachon = request.getParameterValues("c1");
 			String xoaall=request.getParameter("xoaall");
+			long makh =(long)session.getAttribute("makh");
+			
 			if(xoaall!=null) {
-				sesion.removeAttribute("gh");
+				ghdao.deletetGiohang1(makh);
+				session.removeAttribute("gh");
 				RequestDispatcher rd = request.getRequestDispatcher("GioHangController");
 				rd.forward(request, response);
 			}
 			if(xoa!=null){
 		    	for(String c : xoa){
+		    		ghdao.deletetGiohang(c);
 		    		ghdao.Xoahang(c);
 		    	}
 		    	RequestDispatcher rd = request.getRequestDispatcher("GioHangController");
@@ -53,6 +58,7 @@ public class XoaSuaController extends HttpServlet {
 		    }
 			if(xoachon!=null){
 		    	for(String c : xoachon){
+		    		ghdao.deletetGiohang(c);
 		    		ghdao.Xoahang(c);
 		    	}
 		    	RequestDispatcher rd = request.getRequestDispatcher("GioHangController");
@@ -61,11 +67,15 @@ public class XoaSuaController extends HttpServlet {
 			if(cong!=null){
 		    	for(String c : cong){
 		    		ghdao.Cong(c);
+		    		ghdao.updateSoluongCong(c, makh);
+		    		
 		    	}
 		    	RequestDispatcher rd = request.getRequestDispatcher("GioHangController");
 				rd.forward(request, response);
 		    }
 			if(tru!=null){
+				String madt= request.getParameter("tru");
+				ghdao.updateSoluongTru(madt, makh);
 		    	ghdao.tru(tru);
 		    	RequestDispatcher rd = request.getRequestDispatcher("GioHangController");
 				rd.forward(request, response);

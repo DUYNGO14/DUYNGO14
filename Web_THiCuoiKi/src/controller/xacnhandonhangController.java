@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.loaiBean;
 import bean.xacnhanmuaAdminbean;
+import bo.loaiBo;
 import bo.xacnhandonhangAdminbo;
 
 /**
@@ -33,6 +35,9 @@ public class xacnhandonhangController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			loaiBo lbo= new loaiBo();
+			ArrayList<loaiBean> dsloai=lbo.getloai();
+			request.setAttribute("dsloai", dsloai);
 			xacnhandonhangAdminbo xnbo=new xacnhandonhangAdminbo();
 			ArrayList<xacnhanmuaAdminbean> ds = xnbo.getdonhang();
 			request.setAttribute("dsxn", ds);
@@ -43,6 +48,7 @@ public class xacnhandonhangController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		RequestDispatcher rd = request.getRequestDispatcher("xacnhandonhangAdmin.jsp");
 		rd.forward(request, response);
 	}

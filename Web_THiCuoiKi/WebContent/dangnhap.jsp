@@ -42,16 +42,25 @@
           <label>Password</label>
         </div>
         <div class="txt_field">
-         	<select name="quyen" class="form-select" aria-label="Disabled select example"  style="width: 100%">
+         	<select name="quyen"  class="form-select" aria-label="Disabled select example"  style="width: 100%">
          		<option selected>Hãy chọn vai trò</option>
          		<option value="0">Khách hàng</option>
          		<option value="1">Admin</option>
          	</select>
         </div>
+        <c:if test="${dem==3}">
+        <img alt="captcha" src="simpleCaptcha.jpg" width="100px" height="25px">
+        <div class="txt_field">
+          <input type="text" required name="answer">
+          <span></span>
+          <label>Captcha</label>
+        </div>
+        </c:if>
         <div class="pass">Forgot Password?</div>
         <c:if test="${kt!=null }">
         <p class="text-danger">Wrong user or password!</p>
         </c:if>
+
 		<div class="checkbox">
 			<label><input type="checkbox"> Remember me</label>
 		</div>

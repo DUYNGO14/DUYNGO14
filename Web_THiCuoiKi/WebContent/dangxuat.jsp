@@ -8,8 +8,9 @@
 </head>
 <body>
 	<%session.removeAttribute("dn");
-	session.removeAttribute("ghbo");
+	session.removeAttribute("gh");
 	session.setAttribute("quyen", (long)0);
+	session.setAttribute("dem", (int)0);
 	response.sendRedirect("HomeController");
 	%>
 </body>

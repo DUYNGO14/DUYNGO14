@@ -36,6 +36,24 @@ public class giohangbo {
 	public long sohang(String madt) throws Exception{
 		return ghdao.sohang(madt);
 	}
+	public ArrayList<giohangbean> getGioHang(long makh) throws Exception{
+		return ghdao.getGioHang(makh);
+	}
+	public void deletetGiohang(String madt) throws Exception{
+		ghdao.deletetGiohang(madt);
+	}
+	public void insertGiohang(String madt,long soluong,long makh) throws Exception{
+		ghdao.insertGiohang(madt, soluong, makh);
+	}
+	public void deletetGiohang1(long makh) throws Exception{
+		ghdao.deletetGiohang1(makh);
+	}
+	public void updateSoluongCong(String madt,long makh) throws Exception{
+		ghdao.updateSoluongCong(madt, makh);
+	}
+	public void updateSoluongTru(String madt,long makh) throws Exception{
+		ghdao.updateSoluongTru(madt, makh);
+	}
 	public static void main(String[] args) {
 		try {
 			giohangbean g= new giohangbean("m1", "ip", (long)1000, (double)1.1,  (long)1000, "m", "sadsa",  (long)12,  (long)64, "sdef",  (long)1);

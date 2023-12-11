@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.lichsubean;
+import bean.loaiBean;
 import bo.lichsumuahangbo;
+import bo.loaiBo;
 
 /**
  * Servlet implementation class LichSuMuaHangController
@@ -35,6 +37,9 @@ public class LichSuMuaHangController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			HttpSession session =request.getSession();
+			loaiBo lbo=new loaiBo();
+			ArrayList<loaiBean> dsloai=lbo.getloai();
+			request.setAttribute("dsloai", dsloai);
 			if(session.getAttribute("dn")==null) {
 				response.sendRedirect("DangNhapController");
 			}

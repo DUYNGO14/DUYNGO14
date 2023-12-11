@@ -57,14 +57,15 @@ public class dienThoaiBo {
 		}
 		return sl;
 	}
+	public void insertdienthoai(String madt, String tendt, Long gia, Double kichthuocman, Long pin, String maloai, String chip,
+			Long ram, Long dungluong, String anh, Long soluong)throws Exception{
+		dtdao.insertdienthoai(madt, tendt, gia, kichthuocman, pin, maloai, chip, ram, dungluong, anh, soluong);
+	}
 	public static void main(String[] args) {
 		try {
 			dienThoaiBo dtbo = new dienThoaiBo();
-			ArrayList<dienThoaiBean> ds = dtbo.timDienThoai("	");
-			for (dienThoaiBean d : ds) {
-				System.out.println(d);
-			}
-			System.out.println(ds.size());
+			dtbo.insertdienthoai("xm9","Xiaomi Redmi Note 12 Pro 5G Tím",(long)15890000,(double)6.76,(long)5000,"xm","Chip MediaTek Dimensity 9200+ 5G 8 nhân",(long)8,(long)256,"image_dienthoai/xiaomi/xm9.jpg",(long)13);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

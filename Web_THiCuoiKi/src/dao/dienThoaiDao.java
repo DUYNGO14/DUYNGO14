@@ -246,6 +246,26 @@ public class dienThoaiDao {
 		}
 		return 0;
 	}
+	public void insertdienthoai(String madt, String tendt, Long gia, Double kichthuocman, Long pin, String maloai, String chip,
+			Long ram, Long dungluong, String anh, Long soluong)throws Exception{
+		String query="insert into dienthoai(madt,tendt,gia,kichthuocman,pin,maloai,chip,ram,dungluong,anh,soluong) values(?,?,?,?,?,?,?,?,?,?,?)";
+		Connection conn= new KetNoi().getConnection();
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setString(1, madt);
+		ps.setString(2, tendt);
+		ps.setLong(3,gia);
+		ps.setDouble(4, kichthuocman);
+		ps.setLong(5, pin);
+		ps.setString(6, maloai);
+		ps.setString(7, chip);
+		ps.setLong(8, ram);
+		ps.setLong(9, dungluong);
+		ps.setString(10, anh);
+		ps.setLong(11,soluong);
+		ps.executeUpdate();
+		ps.close();
+		conn.close();
+	}
 	public static void main(String[] args) {
 		try {
 			dienThoaiDao dtdao = new dienThoaiDao();

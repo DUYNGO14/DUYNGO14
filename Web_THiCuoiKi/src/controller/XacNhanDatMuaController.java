@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.giohangbean;
+import bean.loaiBean;
 import bo.datmuabo;
+import bo.loaiBo;
 import dao.giohangdao;
 
 /**
@@ -36,9 +39,13 @@ public class XacNhanDatMuaController extends HttpServlet {
 		try {
 			request.setCharacterEncoding("UTF-8");
 			HttpSession session = request.getSession();
+			
 			if(session.getAttribute("dn")==null) {
 				response.sendRedirect("DangNhapController");
 			}else {
+				loaiBo lbo= new loaiBo();
+				ArrayList<loaiBean> dsloai=lbo.getloai();
+				request.setAttribute("dsloai", dsloai);
 				datmuabo dmbo= new datmuabo();
 				long makh = (long)session.getAttribute("makh");
 				String hoten =request.getParameter("txtname");

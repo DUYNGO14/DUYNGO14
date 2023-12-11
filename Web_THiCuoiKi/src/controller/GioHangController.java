@@ -47,7 +47,6 @@ public class GioHangController extends HttpServlet {
 			loaiBo lbo=new loaiBo();
 			ArrayList<loaiBean> dsloai=lbo.getloai();
 			request.setAttribute("dsloai", dsloai);
-			
 			String madt = request.getParameter("mdt");
 			String tendt = request.getParameter("tendt");
 			String chip=request.getParameter("chip");
@@ -59,20 +58,32 @@ public class GioHangController extends HttpServlet {
 			String pin = request.getParameter("pin");
 			String ml=request.getParameter("maloai");
 			Long soluong=(long)0;
+			Long makh= (long)session.getAttribute("makh");
+			
 			if(session.getAttribute("dn")==null) {
 				response.sendRedirect("DangNhapController");
 			}else {
+				giohangdao ghbo= new giohangdao();
+				ArrayList<giohangbean> ds = ghbo.getGioHang(makh);
+				for (giohangbean i : ds) {
+					soluong=ghbo.SoLuong(i.getMadt(), makh);
+					ghbo.Themhang1(i.getMadt(), i.getTendt(), i.getGia(), i.getKichthuocman(), i.getPin(), i.getMaloai(), i.getChip(), i.getRam(), i.getDungluong(), i.getAnh(), i.getSoluong());
+				}
+				if(session.getAttribute("gh")==null) {
+					session.setAttribute("gh", ghbo);
+				}
 				if(madt!=null) {
-					giohangdao ghbo= new giohangdao();
-					if(session.getAttribute("gh")==null) {
-						session.setAttribute("gh", ghbo);
+					if(ghbo.SoLuong(madt, makh)==0) {
+						ghbo.insertGiohang(madt, (long)1, makh);
+					}else {
+						ghbo.updateSoluongCong(madt, makh);
 					}
 					ghbo = (giohangdao)session.getAttribute("gh");
 					ghbo.Themhang(madt, tendt, Long.parseLong(gia), Double.parseDouble(kichthuocman),Long.parseLong(pin),ml,chip,Long.parseLong(ram),Long.parseLong(dungluong),anh,soluong);
 					session.setAttribute("gh", ghbo);
 				}
 				if(session.getAttribute("gh")!=null) {
-					giohangdao ghbo=(giohangdao)session.getAttribute("gh");
+					ghbo=(giohangdao)session.getAttribute("gh");
 					request.setAttribute("ghbo", ghbo);
 					RequestDispatcher rd=request.getRequestDispatcher("giohang.jsp");
 					rd.forward(request, response);
