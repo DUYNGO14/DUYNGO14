@@ -140,6 +140,7 @@
                                    <%} %>
                                </span>
 						</a></li>
+						<li class="nav-item "><a class="nav-link active text-white linkl" aria-current="page" href="donhangController">Đơn hàng</a></li>
 						<!-- <li class="nav-item"><a class="nav-link text-white linkl" href="ThanhToanController">Thanh Toán</a></li> -->
 						<li class="nav-item"><a class="nav-link text-white linkl" href="LichSuMuaHangController">Lịch sử mua hàng</a></li>
 					</ul>
@@ -176,7 +177,7 @@
         <section class="product-cart border-bottom border-danger border-3">
             <div class="container">
                 <div class="row pt-3">
-                    <table class="table">
+                    <table class="table ">
                         <thead>
                           <tr>
                             <th scope="col col-md-4 ">Thông tin sản phẩm</th>

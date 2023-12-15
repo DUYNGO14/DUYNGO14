@@ -13,4 +13,7 @@ public class xacnhandonhangAdminbo {
 	public void XacNhanDon(long MaChiTietHD) throws Exception{
 		xndao.XacNhanDon(MaChiTietHD);
 	}
+	public ArrayList<xacnhanmuaAdminbean> getdonhangdaxacnhan() throws Exception{
+		return xndao.getdonhangdaxacnhan();
+	}
 }

@@ -29,7 +29,7 @@
 <script src="/assets/vendors/jquery.min.js"></script>
 <script src="/assets/owlcarousel/owl.carousel.js"></script>
 <link rel="stylesheet" href="css-jsp/add.css">
-<title>Trang chủ</title>
+<title>Thêm sản phẩm</title>
 </head>
 <body>
 <section class="header">
@@ -130,7 +130,7 @@
 					<ul class="nav justify-content-end mt-2">
 						<li class="nav-item "><a class="nav-link active text-white linkl" aria-current="page" href="HomeController">Trang chủ</a></li>
 						<li class="nav-item"><a class="nav-link text-white linkl" href="khachhangcontroller">Khách hàng</a></li>
-						<li class="nav-item"><a class="nav-link text-white linkl" href="xacnhandonhangController">Xác nhận đơn hàng</a></li>
+						<li class="nav-item"><a class="nav-link text-white linkl" href="xacnhandonhangController?xn2=chua">Xác nhận đơn hàng</a></li>
 						<!-- <li class="nav-item"><a class="nav-link text-white linkl" href="themsanphamController">Thêm sản phẩm</a></li> -->
 						<li class="nav-item dropdown ">
 					          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">

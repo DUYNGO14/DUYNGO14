@@ -67,7 +67,9 @@ public class XacNhanDatMuaController extends HttpServlet {
 					for (giohangbean g : ghdao.ds) {
 						dmbo.HoaDonChiTiet(g.getMadt(),g.getSoluong(), maxhd);
 					}
+					/* dmbo.deleteGiohang(makh); */
 					session.removeAttribute("gh");
+					dmbo.deleteGiohang(makh);
 					response.sendRedirect("HomeController");
 				}
 			}

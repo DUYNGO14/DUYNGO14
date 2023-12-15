@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import bean.dienThoaiBean;
+import bean.donhangbean;
 
 public class datmuadao {
 	public long MaKhachhang() throws Exception{
@@ -92,10 +96,92 @@ public class datmuadao {
         ps.close();
         conn.close();
 	}
+	public void deleteGiohang(long makh) throws Exception{
+		String query="delete from Giohang where makh=?";
+		Connection conn = new KetNoi().getConnection();//mo ket noi voi sql
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setLong(1, makh);
+        ps.executeUpdate();
+        ps.close();
+        conn.close();
+	}
+	public ArrayList<donhangbean> getDonHangCXN(long makh) throws Exception{
+		try {
+			ArrayList<donhangbean> ds = new ArrayList<donhangbean>();
+			String query="select * from View_DonHangChoXacNhan where makh=?";
+			Connection conn = new KetNoi().getConnection();// mo ket noi voi sql
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setLong(1, makh);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				String madt = rs.getString("madt");
+				String tendt = rs.getString("tendt");
+				Long gia = rs.getLong("gia");
+				Double kichthuocman=rs.getDouble("kichthuocman");
+				Long pin = rs.getLong("pin");
+				String maloai = rs.getString("maloai");
+				String chip = rs.getString("chip");
+				Long ram = rs.getLong("ram");
+				Long dungluong = rs.getLong("dungluong");
+				String anh = rs.getString("anh");
+				Long soluongmua = rs.getLong("soluongmua");
+				Long mahoadon=rs.getLong("mahoadon");
+				Date ngaymua = rs.getDate("ngaymua");
+				ds.add(new donhangbean(madt, tendt, gia, kichthuocman, pin, maloai, chip, ram, dungluong, anh, soluongmua,mahoadon,ngaymua));
+			}
+			rs.close();
+			conn.close();
+			return ds;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public long getMaHoaDon(long mahoadon) throws Exception{
+		try {
+			String query="select mahoadon from HoaDonChiTiet where mahoadon=?";
+			Connection conn = new KetNoi().getConnection();// mo ket noi voi sql
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setLong(1, mahoadon);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				return rs.getLong(1);
+			}
+			rs.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	public void deleteHoaDonChiTiet(long mahoadon,String madt) throws Exception{
+		String query="delete from HoaDonChiTiet where mahoadon=? and madt=?";
+		Connection conn = new KetNoi().getConnection();//mo ket noi voi sql
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setLong(1, mahoadon);
+        ps.setString(2,madt);
+        ps.executeUpdate();
+        ps.close();
+        conn.close();
+	}
+	public void deleteHoaDon(long mahoadon,long makh) throws Exception{
+		String query="delete from HoaDon where mahoadon=? and makh=?";
+		Connection conn = new KetNoi().getConnection();//mo ket noi voi sql
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setLong(1, mahoadon);
+        ps.setLong(2,makh);
+        ps.executeUpdate();
+        ps.close();
+        conn.close();
+	}
 	public static void main(String[] args) {
 		try {
 			datmuadao dt=new datmuadao();
-			dt.UpdateKhachHang("Phú Lôc-Huế", "0353322690", 1);
+			System.out.println(dt.getMaHoaDon(1));
+			dt.deleteHoaDonChiTiet(1, "ip2");
+			if(dt.getMaHoaDon(1)==0) {
+				dt.deleteHoaDon(1, 1);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

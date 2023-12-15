@@ -28,11 +28,10 @@
 	href="/assets/owlcarousel/assets/owl.theme.default.min.css">
 <script src="/assets/vendors/jquery.min.js"></script>
 <script src="/assets/owlcarousel/owl.carousel.js"></script>
-<title>Trang chủ</title>
+<title>Đơn hàng</title>
 </head>
-
 <body>
-	<section class="header">
+<section class="header">
 		<div class="container py-3">
 			<div class="row">
 				<div class="col-md-3 ">
@@ -141,6 +140,7 @@
                                    <%} %>
                                </span>
 						</a></li>
+						
 						<li class="nav-item "><a class="nav-link active text-white linkl" aria-current="page" href="donhangController">Đơn hàng</a></li>
 						<!-- <li class="nav-item"><a class="nav-link text-white linkl" href="ThanhToanController">Thanh Toán</a></li> -->
 						<li class="nav-item"><a class="nav-link text-white linkl" href="LichSuMuaHangController">Lịch sử mua hàng</a></li>
@@ -207,178 +207,93 @@
         </div>
       </div>
 	</section>
-	<!-- Begin san pham -->
+	<!-- cart -->
+    <div class="main_index">
+        <section class="bread-crum">
+            <div class="container">
+                <div class="row pt-3">
+                    <div class="col-12 a-left">
+                        <ul class="breadcrumb">
+                            <li class="home ">
+                                <a class="text-decoration-none" href="HomeController"><span class="text-dark">Trang chủ</span></a>
+                                <span class="mr_lr">&nbsp;/&nbsp;</span>
+                            </li>
+                            <li><a class="text-decoration-none" href="donhangController"><span  class="text-warning">Đơn hàng</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+               </div>
+        </section>
+        <section class="title-cart border-bottom border-danger border-3">
+            <div class="container">
+                <div class="row pt-3">
+                    <div class="col-12 a-left  mb-4 fs-4">
+                        <strong>ĐƠN HÀNG CỦA BẠN</strong>
+                    </div>
+                </div>
+           </div>
+        </section>
+        ${dem}
+        <c:if test="${dem==0}">
+        <div class="mb-3">
+        		<div style="font-size: 100px; color: red" align="center" ><i class="fa-brands fa-shopify"></i></div>		
+				<div style="font-size: 20px; color: red" align="center">Không có đơn hàng nào!</div>
+				<div align="center"><a href="HomeController"><button type="button" class="btn btn-danger" name="Mua thêm">Mua điện thoại ngay</button></a></div>
+        </div>
+        </c:if>
+        <!-- test -->
+        <c:if test="${dem!=0}">
+        <section class="product-cart border-bottom border-danger border-3">
+            <div class="container">
+                <div class="row pt-3">
+                <!-- <form action="#" method="post"> -->
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col col-md-4 ">Thông tin sản phẩm</th>
+                            <th scope="col col-md-2">Đơn giá(vnđ)</th>
+                            <th scope="col col-md-2">Số lượng mua</th>
+                            <th scope="col col-md-2">Thành tiền(vnđ)</th>
+                            <th scope="col col-md-2">Ngày đặt</th>
+                            <th scope="col col-md-2">Hủy đơn</th>
+                          </tr>
+                        </thead>
+                       
+                        <tbody>
+                        <c:forEach items="${dsdon}" var="o">
+                          <tr>
+                            <td class="row">
+                                <div class="col-md-6">
+                                    <img  src="${o.anh}" alt="Sap" style="width: 150px; height: 150px;">
+                                </div>
+                                <div class="col-md-6">
+                                <h5>Tên:${o.tendt}</h5>
+								<p>Dung lượng:${o.ram}/${o.dungluong}</p>
+                                <p>Chip:${o.chip}</p>
+                                <p>Dung lượng pin:${o.pin}</p>
+								</div>
+                            </td>
+                            <td  ><div class="text-danger mt-5">${o.gia}vnđ</div></td>
+                            <td>
+                            	<div class="text-danger mt-5">${o.soluong} chiếc</div>
+                            </td>
+                            <td><div class="mt-5 text-danger">${o.gia * o.soluong}vnđ</div></td>
+                            <td><div class="mt-5 text-danger">${o.ngaymua}</div></td>
+                            <td>
+                           		<a href="donhangController?madt=${o.madt}&mahoadon=${o.mahoadon}"><button type="button" class="btn btn-danger mt-5" data-bs-toggle="modal" data-bs-target="#exampleModal">HỦY ĐƠN</button></a> 
+                            </td>
+                          </tr>
+                          </c:forEach>
+                        </tbody>
+                      </table>
+                     <!-- </form> -->
+                </div>
+               </div>
+        </section>
+        </c:if>
+        
+    </div>
 	
-	<section class="mymaincontent my-3 mx-5"> 
-	<c:if test="${quyen==0}">
-		<div class="product-list mb-3">
-	        <div class="product_title border-bottom">
-	          <div class="col-md-3 mx-5 my-3">
-	            <Strong class="bg-danger text-white p-2"><i class="fa-solid fa-mobile-screen-button"></i>  Điện thoại</Strong>
-	          </div>
-	          <div class="col-md-8 ">
-	          </div>
-	        </div>
-	    </div>
-	    <div class="product-list-s py-3 mx-5 my-3">
-	    	<div class="row row-cols-1 row-cols-md-3 g-4">
-	    		<c:choose>
-	    		<c:when test="${k==0}">
-	    			<div class="col-md-4 mb-3"></div>
-	    			<div class="col-md-4 mb-3">
-						<div style="font-size: 100px; color: red" align="center" ><i class="fa-solid fa-mobile-screen"></i></div>		
-						<div style="font-size: 20px; color: red" align="center">Không tìm thấy sản phẩm nào!</div>
-	    			</div>
-	    			<div class="col-md-4 mb-3"></div>
-	    		</c:when>
-	    		<c:otherwise>
-		    		<c:forEach items="${dsdt}" var="o">
-				    	<div class="col-12 col-md-6 col-lg-3 mb-4 ">
-				    	  <p class="fw-lighter">Trả góp 0%</p>
-			              <a href="ThongTinSanPhamConTroller?mdt=${o.madt}"><img src="${o.anh}" alt="nah" width="173px" height="225px"></a>
-			              <h4 class="card-title show_txt" >
-							 <a href="ThongTinSanPhamConTroller?mdt=${o.madt}" class=" text-decoration-none text-dark fs-6 " title="View Product">${o.tendt}</a>
-						  </h4>
-						  <div class="badge bg-secondary text-wrap" style="width: 3rem;">
-							  ${o.kichthuocman}''
-						  </div>
-						  <div class="badge bg-secondary text-wrap" style="width: 3rem;">
-							  ${o.dungluong}GB
-						  </div>
-			              <div class="row mt-2">
-			                <div class="col-md-4 ">
-			                 	<p class="text-danger fs-5 fw-bold">${o.gia}đ</p>
-			                </div>
-			                <div class="col-md-1 "></div>
-			                <div class="col-md-2 ">
-			                  <a href="GioHangController?mdt=${o.madt}&tendt=${o.tendt}&gia=${o.gia}&anh=${o.anh}&ktm=${o.kichthuocman}&pin=${o.pin}&dungluong=${o.dungluong}&ram=${o.ram}&chip=${o.chip}&maloai=${o.maloai}"><i class="fa-solid fa-cart-plus fs-4 text-danger"></i></a>
-			                </div>
-			              </div>
-			              <c:if test="${o.soluong==0}">
-			              <p class="fst-italic text-danger mb-2">Hết hàng!</p>
-			              </c:if>
-			              <p class="fst-italic mb-2">Đánh giá</p>
-			              <c:forEach begin="1" end="5">
-			              	<i class="fa-solid fa-star fs-6 text-warning"></i>
-			              </c:forEach>
-			            </div>
-		            </c:forEach>
-	            </c:otherwise>
-	            </c:choose>
-	    	</div>
-	    </div>
-	    </c:if>
-	   <%--  <div>
-	    	<p>${soluongnew}</p>
-	    	<p>${madtupdate}</p>
-	    </div> --%>
-	    <c:if test="${quyen==1}">
-    	 <table class="table table-hover">
-			  <thead>
-			    <tr>
-			      <th scope="col">Ảnh sản phẩm</th>
-			      <th scope="col">Thông tin sản phẩm</th>
-			      <th scope="col">Giá</th>
-			      <th scope="col">Số lượng còn</th>
-			      <th scope="col">Xóa sản phẩm</th>
-			      <th scope="col">Cập nhật số lượng</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-				<c:forEach items="${dsdt}" var="o">
-	            <tr>
-              	 	<td><div class="mt-5"><a href="ThongTinSanPhamConTroller?mdt=${o.madt}"><img src="${o.anh}" alt="nah" width="140px" height="160px"></a></div></td>
-              	 	<td>
-              	 	  <div class="mt-2">
-              	 	  	 <p>Tên sản phẩm:${o.tendt}</p>
-					     <p>Kích thước màn:${o.kichthuocman}''</p>
-					     <p>Dung lượng pin:${o.pin}mAh</p>
-					     <p>Chip:${o.chip}</p>
-					     <p>Ram:${o.ram}GB</p>
-					     <p>Dung lượng lưu trữ:${o.dungluong}GB</p>
-					  </div>
-              	 	 	</td>
-              	 	 	<td><div class="mt-5">${o.gia}vnđ</div></td>
-              	 	 	<td>
-              	 	 		<div class="mt-5 text-danger">${o.soluong} chiếc
-              	 	 		<c:if test="${o.soluong<5}"> (Số lượng còn ít) </c:if>
-              	 	 		</div>
-              	 	 	</td>
-              	 	 	<td>
-              	 	 		<a href="HomeController?madtdelete=${o.madt}"><button type="submit" class="btn btn-danger mt-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button></a>
-                    	</td>
-                    	<td>
-							<!-- Modal -->
-							<button type="button" class="btn btn-danger mt-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
-							 Update
-							</button>
-							<form action="HomeController" method="post">
-							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-							  <div class="modal-dialog">
-							    <div class="modal-content">
-							      <div class="modal-header">
-							        <h5 class="modal-title" id="exampleModalLabel">Thêm số lượng</h5>
-							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-							      </div>
-							      <div class="modal-body">
-							      	<div class="row g-3 align-items-center mb-3">
-									  <div class="col-auto">
-									    <label for="inputPassword6" class="col-form-label">Mã điện thoại</label>
-									  </div>
-									  <div class="col-auto">
-									    <input type="text"   id="inputPassword6" name="madtupdate" value="${o.madt}" class="form-control" aria-describedby="passwordHelpInline">
-									  </div>
-									</div>
-									<div class="row g-3 align-items-center mb-3">
-									  <div class="col-auto">
-									    <label for="inputPassword6" class="col-form-label">Số lượng cũ</label>
-									  </div>
-									  <div class="col-auto">
-									    <input type="text" disabled="disabled"  id="inputPassword6" name="soluongcu" value="${o.soluong}" class="form-control" aria-describedby="passwordHelpInline">
-									  </div>
-									</div>
-							     	<div class="row g-3 align-items-center mb-3">
-									  <div class="col-auto">
-									    <label for="inputPassword6" class="col-form-label">Số lượng mới</label>
-									  </div>
-									  <div class="col-auto">
-									    <input type="number" required id="inputPassword6" name="soluongnew" value="${soluongnew}" class="form-control" aria-describedby="passwordHelpInline">
-									  </div>
-									</div>
-							      </div>
-							      <div class="modal-footer">
-							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-							        <button type="submit" class="btn btn-primary">Save</button>
-							      </div>
-							    </div>
-							  </div>
-							</div>
-							</form>
-                    	</td>
-              	 	 </tr>
-	           </c:forEach>	     
-			  </tbody>
-		</table>
-     </c:if>
-	    <nav class="page" aria-label="Page navigation example pb-3">
-		  <ul class="nav justify-content-center">
-		    <c:forEach begin="1" end="${maxpage}" var="i">
-		    <c:if test="${ml==null&&key==null}">
-		    <li class="page-item"><a class="page-link"  href="HomeController?index=${i}">${i}</a></li>
-		    </c:if>
-		    <c:if test="${ml!=null}">
-		    <li class="page-item"><a class="page-link"  href="HomeController?index1=${i}&ml1=${ml}">${i}</a></li>
-		    </c:if>
-		   <c:if test="${key!=null}">
-		    <li class="page-item"><a class="page-link"  href="HomeController?index2=${i}&tk=${key}">${i}</a></li>
-		    </c:if>
-		    </c:forEach>
-		  </ul>
-		</nav>
-	</section>
-	
-
-	<!-- End san pham -->
 	<section class="myfooter bg-dark text-white py-4">
     <div class="container">
       <div class="row">

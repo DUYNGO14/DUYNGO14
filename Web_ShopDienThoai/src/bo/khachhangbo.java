@@ -10,6 +10,9 @@ public class khachhangbo {
 	public ArrayList<khachhangbean> getKhachHang() throws Exception{
 		return khdao.getKhachHang();
 	}
+	public khachhangbean getKhachHangma(long makh1) throws Exception{
+		return khdao.getKhachHangma(makh1);
+	}
 	public static void main(String[] args) {
 		try {
 			khachhangbo k =new khachhangbo();

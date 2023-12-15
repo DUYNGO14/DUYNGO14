@@ -40,11 +40,14 @@ public class HomeController extends HttpServlet {
 				dtbo.deleteDienThoai(madtdelete);
 			}
 			//cap nhat so luong
-			String madt1=request.getParameter("madt1");
+			String madtupdate=request.getParameter("madtupdate");
 			String soluongnew = request.getParameter("soluongnew");
-			if(madt1!=null && soluongnew!=null) {
-				dtbo.updateSoluong(madt1,Long.parseLong(soluongnew));
-			}
+			request.setAttribute("madtupdate", madtupdate);
+			request.setAttribute("soluongnew", soluongnew);
+			
+			 if(madtupdate!=null && soluongnew!=null && Long.parseLong(soluongnew)>=0) {
+				 dtbo.updateSoluong(madtupdate,Long.parseLong(soluongnew)); 
+			 }
 			//phân trang
 			String indexpage="";
 			String ml1=request.getParameter("ml1");

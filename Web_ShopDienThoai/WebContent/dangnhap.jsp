@@ -49,7 +49,7 @@
          	</select>
         </div>
         <c:if test="${dem==3}">
-        <img alt="captcha" src="simpleCaptcha.jpg" width="100px" height="25px">
+        <img alt="captcha" src="simpleCaptcha.jpg" width="150px" height="50px">
         <div class="txt_field">
           <input type="text" required name="answer">
           <span></span>

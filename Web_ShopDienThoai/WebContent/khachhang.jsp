@@ -129,7 +129,7 @@
 					<ul class="nav justify-content-end mt-2">
 						<li class="nav-item "><a class="nav-link active text-white linkl" aria-current="page" href="HomeController">Trang chủ</a></li>
 						<li class="nav-item"><a class="nav-link text-white linkl" href="khachhangcontroller">Khách hàng</a></li>
-						<li class="nav-item"><a class="nav-link text-white linkl" href="xacnhandonhangController">Xác nhận đơn hàng</a></li>
+						<li class="nav-item"><a class="nav-link text-white linkl" href="xacnhandonhangController?xn2=chua">Xác nhận đơn hàng</a></li>
 						<!-- <li class="nav-item"><a class="nav-link text-white linkl" href="themsanphamController">Thêm sản phẩm</a></li> -->
 						<li class="nav-item dropdown ">
 					          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -185,7 +185,7 @@
 	<section class="product-cart border-bottom border-danger border-3">
             <div class="container">
                 <div class="row pt-3">
-                    <table class="table">
+                    <table class="table table-hover">
                         <thead>
                           <tr>
                             <th scope="col col-md-1"></th>

@@ -9,9 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import bean.khachhangbean;
 import bean.loaiBean;
 import bo.dienThoaiBo;
+import bo.khachhangbo;
 import bo.loaiBo;
 
 /**
@@ -34,6 +37,7 @@ public class ThanhToanController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			HttpSession session = request.getSession();
 			request.setCharacterEncoding("utf-8");
 			response.setCharacterEncoding("utf-8");
 			loaiBo lbo = new loaiBo();
@@ -41,6 +45,10 @@ public class ThanhToanController extends HttpServlet {
 			request.setAttribute("dsloai", dsloai);
 			String tien = request.getParameter("tt");
 			request.setAttribute("tien", tien);
+			khachhangbo khbo=new khachhangbo();
+			long makh= (long)session.getAttribute("makh");
+			khachhangbean kh= khbo.getKhachHangma(makh);
+			request.setAttribute("khachhang", kh);
 			RequestDispatcher rd = request.getRequestDispatcher("thanhtoan.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {
