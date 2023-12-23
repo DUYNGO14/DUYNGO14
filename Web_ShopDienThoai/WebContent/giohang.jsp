@@ -142,6 +142,7 @@
                                </span>
 						</a></li>
 						<li class="nav-item "><a class="nav-link active text-white linkl" aria-current="page" href="donhangController">Đơn hàng</a></li>
+						<li class="nav-item "><a class="nav-link active text-white linkl" aria-current="page" href="voucherController?vcb=vcb">Voucher</a></li>
 						<!-- <li class="nav-item"><a class="nav-link text-white linkl" href="ThanhToanController">Thanh Toán</a></li> -->
 						<li class="nav-item"><a class="nav-link text-white linkl" href="LichSuMuaHangController">Lịch sử mua hàng</a></li>
 					</ul>
@@ -251,12 +252,39 @@
                     <div class="col-md-8"></div>
                     <div class="col-md-4 mt-3">
                         <div class="row mb-3">
-                            <div class="col-md fs-5">Tổng tiền:</div>
-                            <div class="col-md fs-5 text-danger"><%=ghbo.Tongtien() %>vnđ</div>
+                            <div class="col-md-5 fs-5">Tổng tiền:</div>
+                            <div class="col-md-7 fs-5 text-danger"><%=ghbo.Tongtien() %>vnđ</div>
+                        </div>
+                        <span>-</span>
+                        <div class="row mb-3 mr-3">
+                            <div class="col-md-5 fs-5">Voucher:</div>
+                            <div class="col-md-7 input-group mb-3">
+							  <input type="text" class="form-control" placeholder="Voucher" value="${giatri}vnđ " aria-label="Recipient's username" aria-describedby="button-addon2">
+							  <a href="voucherController?vcb=vcb">
+							  	<button class="btn btn-outline-danger" type="button" id="button-addon2">Chọn voucher</button>
+							  </a>
+							   <a href="GioHangController?huy=huy">
+							     <button class="btn btn-outline-danger" type="button" id="button-addon2">Hủy</button>
+							  </a>
+							</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-5 fs-5">Thanh toán:  </div>
+                            <c:if test="${giatri!=null}">
+                            <div class="col-md-7 fs-5 text-danger"><%=ghbo.Tongtien() %> - ${giatri }</div>
+                            </c:if>
+                            <c:if test="${giatri==null}">
+                            <div class="col-md-7 fs-5 text-danger"><%=ghbo.Tongtien() %></div>
+                            </c:if>
                         </div>
                         <div class="thanhtoan text-end row">
                         <div class="col-md-4">
+                        <c:if test="${giatri!=null}">
+                            <a href="ThanhToanController?tt=<%=ghbo.Tongtien()%>&vc=${giatri}&mavc=${mavc}"><button type="button" class="btn btn-danger w-100">Thanh toán</button></a>
+                        </c:if>
+                        <c:if test="${giatri==null}">
                             <a href="ThanhToanController?tt=<%=ghbo.Tongtien()%>"><button type="button" class="btn btn-danger w-100">Thanh toán</button></a>
+                        </c:if>
                         </div>
                          <div class="col-md-4">
                             <a href="HomeController"><button type="button" class="btn btn-danger w-100">Xem thêm</button></a>

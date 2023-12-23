@@ -17,7 +17,7 @@
   padding:25px;
   width:100%;
   min-height: 100vh;
-  background: linear-gradient(45deg, #D06814 50%, #FFCDB2 55%);
+  background: white;
 }
 
 .container_pay form{

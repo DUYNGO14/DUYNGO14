@@ -16,4 +16,10 @@ public class xacnhandonhangAdminbo {
 	public ArrayList<xacnhanmuaAdminbean> getdonhangdaxacnhan() throws Exception{
 		return xndao.getdonhangdaxacnhan();
 	}
+	public Long DoanhThu() throws Exception{
+		return xndao.DoanhThu();
+	}
+	public xacnhanmuaAdminbean getdienthoaibanchay() throws Exception{
+		return xndao.getdienthoaibanchay();
+	}
 }

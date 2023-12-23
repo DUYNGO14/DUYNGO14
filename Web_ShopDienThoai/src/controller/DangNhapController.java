@@ -38,8 +38,8 @@ public class DangNhapController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
 		try {
-			HttpSession session = request.getSession();
 			dangnhapbo dnbo = new dangnhapbo();
        		datmuabo dmbo = new datmuabo();
 			String un = request.getParameter("txtun");
@@ -82,6 +82,7 @@ public class DangNhapController extends HttpServlet {
 					}
 				}
 			}
+			
 			RequestDispatcher rd = request.getRequestDispatcher("dangnhap.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {

@@ -10,20 +10,18 @@
 }
 .container1{
 	margin: auto;
-
     max-width: 650px;
-    background: #dc3545;
+    background: white;
     padding: 28px;
-   
     border-radius: 10px;
-    /* box-shadow: inset -2px 2px 2px white; */
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
 }
 .form-title{
     font-size: 18px;
     font-weight: 600;
     text-align: center;
     padding-bottom: 6px;
-    color: white;
+    color: black;
    /*  text-shadow: 2px 2px 2px black; */
     /* border-bottom: solid 1px white; */
 }
@@ -48,7 +46,7 @@
 
 .user-input-box label{
     width: 95%;
-    color: white;
+    color: black;
     font-size: 20px;
     font-weight: 400;
     margin: 5px 0;
@@ -65,7 +63,7 @@
 }
 
 .gender-title{
-    color:white;
+    color:black;
     font-size: 24px;
     font-weight: 600;
     border-bottom: 1px solid white;
@@ -73,7 +71,7 @@
 
 .gender-category{
     margin: 15px 0;
-    color: white;
+    color: black;
 }
 
 .gender-category label{

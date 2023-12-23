@@ -23,7 +23,6 @@ public class khachhangdao {
             	String email = rs.getString("email");
             	String tendn = rs.getString("tendangnhap");
             	String pass = rs.getString("matkhau");
-				
 				ds.add(new khachhangbean(makh, hoten, diachi, sdt, email, tendn, pass));
 			}
 			

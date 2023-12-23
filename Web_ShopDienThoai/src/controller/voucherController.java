@@ -11,24 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.dienThoaiBean;
-import bean.donhangbean;
 import bean.loaiBean;
-import bo.datmuabo;
-import bo.dienThoaiBo;
+import bean.voucherbean;
 import bo.loaiBo;
+import bo.thongkebo;
 
 /**
- * Servlet implementation class donhangController
+ * Servlet implementation class voucherController
  */
-@WebServlet("/donhangController")
-public class donhangController extends HttpServlet {
+@WebServlet("/voucherController")
+public class voucherController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public donhangController() {
+    public voucherController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,36 +36,41 @@ public class donhangController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			HttpSession session = request.getSession();
+			long makh= (long)session.getAttribute("makh");
 			request.setCharacterEncoding("utf-8");
 			response.setCharacterEncoding("utf-8");
-			HttpSession session = request.getSession();
 			loaiBo lbo=new loaiBo();
-			dienThoaiBo dtbo=new dienThoaiBo();
-			datmuabo dmbo=new datmuabo();
 			ArrayList<loaiBean> dsloai=lbo.getloai();
 			request.setAttribute("dsloai", dsloai);
-			if(session.getAttribute("dn")==null) {
-				response.sendRedirect("DangNhapController");
-			}else {
-				long makh= (long)session.getAttribute("makh");
-				ArrayList<donhangbean> dsdon=dmbo.getDonHangCXN(makh);
-				long dem = dsdon.size();
-				request.setAttribute("dem", dem);
-				request.setAttribute("dsdon", dsdon);
-				String madt = request.getParameter("madt");
-				String mahoadon=request.getParameter("mahoadon");
-				if(madt!=null && mahoadon!=null) {
-					dmbo.deleteHoaDonChiTiet(Long.parseLong(mahoadon), madt);	
-				}
-				if(dmbo.getMaHoaDon(Long.parseLong(mahoadon))==0) {
-					dmbo.deleteHoaDon(Long.parseLong(mahoadon),makh);
-				}
-				
+			thongkebo tkbo=new thongkebo();
+			ArrayList<voucherbean> ds = new ArrayList<voucherbean>();			
+			ArrayList<voucherbean> dsgiam = tkbo.getVoucher1(1);
+			ArrayList<voucherbean> dsship = tkbo.getVoucher1(2);
+			ArrayList<voucherbean> dsvou = tkbo.getVouchermakh(makh);
+			String vcb= request.getParameter("vcb");
+			String vcc=request.getParameter("vcc");
+			request.setAttribute("vcc", vcc);
+			request.setAttribute("vcb", vcb);
+			int k=0;
+			if(vcb!=null) {
+				request.setAttribute("dsv", dsvou);
+				k=dsvou.size();
+				request.setAttribute("check", k);
+			}
+			if(vcc!=null) {
+				request.setAttribute("dsv", tkbo.getVoucher());
+				k=tkbo.getVoucher().size();
+				request.setAttribute("check", k);
+			}
+			String mavc = request.getParameter("mavc");
+			if(mavc!=null) {
+				tkbo.insertvoucher(Long.parseLong(mavc), makh);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		RequestDispatcher rd=request.getRequestDispatcher("donhang.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("voucher.jsp");
 		rd.forward(request, response);
 	}
 

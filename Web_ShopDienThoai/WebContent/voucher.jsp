@@ -22,17 +22,17 @@
 	integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="css-jsp/style.css">
+<link rel="stylesheet" href="css-jsp/voucher.css">
 <link rel="stylesheet"
 	href="/assets/owlcarousel/assets/owl.carousel.min.css">
 <link rel="stylesheet"
 	href="/assets/owlcarousel/assets/owl.theme.default.min.css">
 <script src="/assets/vendors/jquery.min.js"></script>
 <script src="/assets/owlcarousel/owl.carousel.js"></script>
-<title>Trang chủ</title>
+<title>voucher</title>
 </head>
-
 <body>
-	<section class="header">
+<section class="header">
 		<div class="container py-3">
 			<div class="row">
 				<div class="col-md-3 ">
@@ -143,7 +143,6 @@
 						</a></li>
 						<li class="nav-item "><a class="nav-link active text-white linkl" aria-current="page" href="donhangController">Đơn hàng</a></li>
 						<li class="nav-item "><a class="nav-link active text-white linkl" aria-current="page" href="voucherController?vcb=vcb">Voucher</a></li>
-						<!-- <li class="nav-item"><a class="nav-link text-white linkl" href="ThanhToanController">Thanh Toán</a></li> -->
 						<li class="nav-item"><a class="nav-link text-white linkl" href="LichSuMuaHangController">Lịch sử mua hàng</a></li>
 					</ul>
 				</div>
@@ -156,12 +155,12 @@
 						<li class="nav-item"><a class="nav-link text-white linkl" href="xacnhandonhangController?xn2=chua">Xác nhận đơn hàng</a></li>
 						<li class="nav-item dropdown ">
 					          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-					            Thêm mới
+					            Thêm sản phẩm
 					          </a>
 					          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					            <li><a class="dropdown-item" href="themsanphamController?dt=dt">Thêm điện thoại mới</a></li>
 					            <li><a class="dropdown-item" href="themsanphamController?hang=dt">Thêm hãng điện thoại</a></li>
-					            <li><a class="dropdown-item" href="themsanphamController?vc=vc">Thêm voucher</a></li>
+					            <li><a class="dropdown-item" href="voucherController?vc=vc">Thêm voucher</a></li>
 					          </ul>
 					     </li>
 					</ul>
@@ -208,195 +207,64 @@
         </div>
       </div>
 	</section>
-	<!-- Begin san pham -->
-	
-	<section class="mymaincontent my-3 mx-5"> 
-	<c:if test="${quyen==0}">
-		<div class="product-list mb-3">
-	        <div class="product_title border-bottom">
-	          <div class="col-md-3 mx-5 my-3">
-	            <Strong class="bg-danger text-white p-2"><i class="fa-solid fa-mobile-screen-button"></i>  Điện thoại</Strong>
-	          </div>
-	          <div class="col-md-8 ">
-	          </div>
-	        </div>
-	    </div>
-	    <div class="product-list-s py-3 mx-5 my-3">
-	    	<div class="row row-cols-1 row-cols-md-3 g-4">
-	    		<c:choose>
-	    		<c:when test="${k==0}">
-	    			<div class="col-md-4 mb-3"></div>
-	    			<div class="col-md-4 mb-3">
-						<div style="font-size: 100px; color: red" align="center" ><i class="fa-solid fa-mobile-screen"></i></div>		
-						<div style="font-size: 20px; color: red" align="center">Không tìm thấy sản phẩm nào!</div>
-	    			</div>
-	    			<div class="col-md-4 mb-3"></div>
-	    		</c:when>
-	    		<c:otherwise>
-		    		<c:forEach items="${dsdt}" var="o">
-				    	<div class="col-12 col-md-6 col-lg-3 mb-4 ">
-				    	  <p class="fw-lighter">Trả góp 0%</p>
-			              <a href="ThongTinSanPhamConTroller?mdt=${o.madt}"><img src="${o.anh}" alt="nah" width="173px" height="225px"></a>
-			              <h4 class="card-title show_txt" >
-							 <a href="ThongTinSanPhamConTroller?mdt=${o.madt}" class=" text-decoration-none text-dark fs-6 " title="View Product">${o.tendt}</a>
-						  </h4>
-						  <div class="badge bg-secondary text-wrap" style="width: 3rem;">
-							  ${o.kichthuocman}''
-						  </div>
-						  <div class="badge bg-secondary text-wrap" style="width: 3rem;">
-							  ${o.dungluong}GB
-						  </div>
-			              <div class="row mt-2">
-			                <div class="col-md-4 ">
-			                 	<p class="text-danger fs-5 fw-bold">${o.gia}đ</p>
-			                </div>
-			                <div class="col-md-1 "></div>
-			                <div class="col-md-2 ">
-			                  <a href="GioHangController?mdt=${o.madt}&tendt=${o.tendt}&gia=${o.gia}&anh=${o.anh}&ktm=${o.kichthuocman}&pin=${o.pin}&dungluong=${o.dungluong}&ram=${o.ram}&chip=${o.chip}&maloai=${o.maloai}"><i class="fa-solid fa-cart-plus fs-4 text-danger"></i></a>
-			                </div>
-			              </div>
-			              <c:if test="${o.soluong==0}">
-			              <p class="fst-italic text-danger mb-2">Hết hàng!</p>
-			              </c:if>
-			              <p class="fst-italic mb-2">Đánh giá</p>
-			              <c:forEach begin="1" end="5">
-			              	<i class="fa-solid fa-star fs-6 text-warning"></i>
-			              </c:forEach>
-			            </div>
-		            </c:forEach>
-	            </c:otherwise>
-	            </c:choose>
-	    	</div>
-	    </div>
-	    </c:if>
-	    <c:if test="${quyen==1}">
-	    <c:choose>
-	    		<c:when test="${k==0}">
-	    		<div class="row">
-	    			<div class="col-md-4 mb-3"></div>
-	    			<div class="col-md-4 mb-3">
-						<div style="font-size: 100px; color: red" align="center" ><i class="fa-solid fa-mobile-screen"></i></div>		
-						<div style="font-size: 20px; color: red" align="center">Không tìm thấy sản phẩm nào!</div>
-	    			</div>
-	    			<div class="col-md-4 mb-3"></div>
-	    		</div>
-	    		</c:when>
-	    <c:otherwise>
-	    <div class="ml-3">
-	     <button type="button" class="btn btn-lg btn-outline-primary" disabled>
-	    	<div>Doanh thu : ${doanhthu} VNĐ</div>
-	     </button>
-	     <button type="button" class="btn btn-lg btn-outline-danger" disabled>
-	    	<div>Mặt hàng bán chạy: ${banchay}</div>
-	     </button>
-	     </div>
-    	 <table class="table table-hover">
-			  <thead>
-			    <tr>
-			      <th scope="col">Ảnh sản phẩm</th>
-			      <th scope="col">Thông tin sản phẩm</th>
-			      <th scope="col">Giá</th>
-			      <th scope="col">Số lượng còn</th>
-			      <th scope="col">Xóa sản phẩm</th>
-			      <th scope="col">Cập nhật số lượng</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-				<c:forEach items="${dsdt}" var="o">
-	            <tr>
-              	 	<td><div class="mt-5"><a href="ThongTinSanPhamConTroller?mdt=${o.madt}"><img src="${o.anh}" alt="nah" width="100px" height="120px"></a></div></td>
-              	 	<td>
-              	 	  <div class="" style="font-size: 15px">
-              	 	  	 <p>Tên sản phẩm:${o.tendt}</p>
-					     <p>Kích thước màn:${o.kichthuocman}''</p>
-					     <p>Dung lượng pin:${o.pin}mAh</p>
-					     <p>Chip:${o.chip}</p>
-					     <p>Ram:${o.ram}GB</p>
-					     <p>Dung lượng lưu trữ:${o.dungluong}GB</p>
-					  </div>
-              	 	 	</td>
-              	 	 	<td><div class="mt-5">${o.gia}vnđ</div></td>
-              	 	 	<td>
-              	 	 		<div class="mt-5 text-danger">${o.soluong} chiếc
-              	 	 		<c:if test="${o.soluong<5}"> (Số lượng còn ít) </c:if>
-              	 	 		</div>
-              	 	 	</td>
-              	 	 	<td>
-              	 	 		<a href="HomeController?madtdelete=${o.madt}"><button type="submit" class="btn btn-danger mt-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button></a>
-                    	</td>
-                    	<td>
-							<!-- Modal -->
-							<button type="button" class="btn btn-danger mt-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
-							 Update
-							</button>
-							<form action="HomeController" method="post">
-							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-							  <div class="modal-dialog">
-							    <div class="modal-content">
-							      <div class="modal-header">
-							        <h5 class="modal-title" id="exampleModalLabel">Thêm số lượng</h5>
-							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-							      </div>
-							      <div class="modal-body">
-							      	<div class="row g-3 align-items-center mb-3">
-									  <div class="col-auto">
-									    <label for="inputPassword6" class="col-form-label">Mã điện thoại</label>
-									  </div>
-									  <div class="col-auto">
-									    <input type="text"   id="inputPassword6" name="madtupdate" value="${o.madt}" class="form-control" aria-describedby="passwordHelpInline">
-									  </div>
-									</div>
-									<div class="row g-3 align-items-center mb-3">
-									  <div class="col-auto">
-									    <label for="inputPassword6" class="col-form-label">Số lượng cũ</label>
-									  </div>
-									  <div class="col-auto">
-									    <input type="text" disabled="disabled"  id="inputPassword6" name="soluongcu" value="${o.soluong}" class="form-control" aria-describedby="passwordHelpInline">
-									  </div>
-									</div>
-							     	<div class="row g-3 align-items-center mb-3">
-									  <div class="col-auto">
-									    <label for="inputPassword6" class="col-form-label">Số lượng mới</label>
-									  </div>
-									  <div class="col-auto">
-									    <input type="number" required id="inputPassword6" name="soluongnew" value="${soluongnew}" class="form-control" aria-describedby="passwordHelpInline">
-									  </div>
-									</div>
-							      </div>
-							      <div class="modal-footer">
-							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-							        <button type="submit" class="btn btn-primary">Save</button>
-							      </div>
-							    </div>
-							  </div>
-							</div>
-							</form>
-                    	</td>
-              	 	 </tr>
-	           </c:forEach>	     
-			  </tbody>
-		</table>
-		</c:otherwise>
-		</c:choose>
-     </c:if>
-	    <nav class="page" aria-label="Page navigation example pb-3">
-		  <ul class="nav justify-content-center">
-		    <c:forEach begin="1" end="${maxpage}" var="i">
-		    <c:if test="${ml==null&&key==null}">
-		    <li class="page-item"><a class="page-link"  href="HomeController?index=${i}">${i}</a></li>
-		    </c:if>
-		    <c:if test="${ml!=null}">
-		    <li class="page-item"><a class="page-link"  href="HomeController?index1=${i}&ml1=${ml}">${i}</a></li>
-		    </c:if>
-		   <c:if test="${key!=null}">
-		    <li class="page-item"><a class="page-link"  href="HomeController?index2=${i}&tk=${key}">${i}</a></li>
-		    </c:if>
-		    </c:forEach>
-		  </ul>
-		</nav>
+	<section class="container ml-3">
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="voucherController?vcb=vcb"><button type="button" class="btn btn-danger btn-sm">Voucher của bạn</button></a></li>
+	    <li class="breadcrumb-item"><a href="voucherController?vcc=vcc"><button type="button" class="btn btn-danger btn-sm">Nhận thêm voucher</button></a></li>
+	  </ol>
+	</nav>
 	</section>
-	
-
+	<!-- Begin -->
+	<section>
+		<c:if test="${vcb!=null}">
+			<h2 class="text-center">Danh sách voucher của bạn</h2>
+		</c:if>
+		<c:if test="${vcc!=null}">
+			<h2 class="text-center">Nhận thêm voucher</h2>
+		</c:if>
+		<c:if test="${check==0}">
+			<div class="row">
+				<div class="col-md-4 mb-3"></div>
+				<div class="col-md-4 mb-3">
+					<div style="font-size: 100px; color: red" align="center" ><i class="fa-solid fa-ticket"></i></div>
+					<div style="font-size: 20px; color: red" align="center">Không có voucher!</div>
+				</div>
+				<div class="col-md-4 mb-3"></div>
+			</div>
+		</c:if>
+		<form action="voucherController" method="post">
+			<c:forEach items="${dsv}" var="o">
+				<c:if test="${o.soluong>0}">
+					<div class="coupon">
+						<div class="logo">
+							<c:if test="${o.maloaivoucher==1}">
+								<i class="fas fa-shopping-bag"></i>
+							</c:if>
+							<c:if test="${o.maloaivoucher==2}">
+								<i class="fa-solid fa-truck-moving"></i>
+							</c:if>
+						</div>
+						<div class="discount">
+							<span>${o.tenvoucher}</span> <span>Giảm ₫${o.giatri}</span> <span>Đơn
+								Tối Thiểu ₫0</span> <span>Có hiệu lực từ 01 Th12</span>
+						</div>
+						<div class="buttons">
+							<c:if test="${vcc!=null}">
+								<a href="voucherController?mavc=${o.mavoucher}&vcc=vcc"><button
+										type="button" class="save">Lưu</button></a>
+							</c:if>
+							<c:if test="${vcb!=null}">
+								<a href="GioHangController?giatri=${o.giatri}&mavc=${o.mavc}"><button
+										type="button" class="save">Sử dụng</button></a>
+							</c:if>
+							<span>Số lượng: ${o.soluong}</span>
+						</div>
+					</div>
+				</c:if>
+			</c:forEach>
+		</form>
+	</section>
 	<!-- End san pham -->
 	<section class="myfooter bg-dark text-white py-4">
     <div class="container">

@@ -59,7 +59,14 @@ public class GioHangController extends HttpServlet {
 			String ml=request.getParameter("maloai");
 			Long soluong=(long)0;
 			Long makh= (long)session.getAttribute("makh");
-			
+			String giatri = request.getParameter("giatri");
+			String huy = request.getParameter("huy");
+			String mavc=request.getParameter("mavc");
+			request.setAttribute("mavc", mavc);
+			if(huy!=null) {
+				request.setAttribute("giatri", 0);
+			}
+			request.setAttribute("giatri", giatri);
 			if(session.getAttribute("dn")==null) {
 				response.sendRedirect("DangNhapController");
 			}else {

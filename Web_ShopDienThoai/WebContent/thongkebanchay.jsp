@@ -28,10 +28,10 @@
 	href="/assets/owlcarousel/assets/owl.theme.default.min.css">
 <script src="/assets/vendors/jquery.min.js"></script>
 <script src="/assets/owlcarousel/owl.carousel.js"></script>
-<title>Xác nhận admin</title>
+<title>Thống kê</title>
 </head>
 <body>
-<section class="header">
+	<section class="header">
 		<div class="container py-3">
 			<div class="row">
 				<div class="col-md-3 ">
@@ -133,12 +133,11 @@
 						<!-- <li class="nav-item"><a class="nav-link text-white linkl" href="themsanphamController">Thêm sản phẩm</a></li> -->
 						<li class="nav-item dropdown ">
 					          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-					            Thêm mới
+					            Thêm sản phẩm
 					          </a>
 					          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					            <li><a class="dropdown-item" href="themsanphamController?dt=dt">Thêm điện thoại mới</a></li>
 					            <li><a class="dropdown-item" href="themsanphamController?hang=dt">Thêm hãng điện thoại</a></li>
-					            <li><a class="dropdown-item" href="themsanphamController?vc=vc">Thêm voucher</a></li>
 					          </ul>
 					     </li>
 					</ul>
@@ -146,7 +145,6 @@
 			</div>
 		</div>
 	</section>
-	
 	<section class="mymaincontent my-3">
 		<div class="container">
       <div class="slider mb-3">
@@ -184,99 +182,6 @@
         </div>
       </div>
 	</section>
-	<section class="container ml-3">
-	<nav aria-label="breadcrumb">
-	  <ol class="breadcrumb">
-	    <li class="breadcrumb-item"><a href="xacnhandonhangController?xn1=roi"><button type="button" class="btn btn-outline-danger btn-sm">Đơn hàng đã xác nhận</button></a></li>
-	    <li class="breadcrumb-item"><a href="xacnhandonhangController?xn2=chua"><button type="button" class="btn btn-outline-danger btn-sm">Đơn hàng chờ xác nhận</button></a></li>
-	  </ol>
-	</nav>
-	</section>
-	<section class="product-cart border-bottom border-danger border-3">
-            <div class="container">
-                <div class="row pt-3">
-                	<c:if test="${xn2!=null}">
-                	<h2 class="text-center">Danh sách đơn hàng cần xác nhận</h2>
-                    <table class="table table-hover ">
-                        <thead>
-                          <tr>
-                          	<th scope="col col-md-2 ">Tên khách hàng</th>
-                            <th scope="col col-md-2 ">Tên điện thoai</th>
-                            <th scope="col col-md-2">Đơn giá</th>
-                            <th scope="col col-md-2">Số lượng mua</th>
-                            <th scope="col col-md-2">Thành tiền</th>
-                            <th scope="col col-md-2">Xác nhận đơn</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-	                      	<c:forEach items="${dsxn}" var="o">
-	                          <tr>
-	                          	<td><div class="my-2">${o.hoten}</div></td>
-	                            <td><div class="my-2">${o.tendt}</div></td>
-	                            <td><div class="my-2">${o.gia}</div></td>
-	                            <td><div class="my-2">${o.soluongmua}</div></td>
-	                            <td><div class="my-2">${o.thanhtien}</div></td>
-	                            <td><div class="my-2"><a class="text-decoration-none" href="xacnhandonhangController?mact=${o.machitiethd}&xn2=chua">Xác nhận</a></div></td>
-	                          </tr>
-	                        </c:forEach>
-                        </tbody>
-                     </table>
-                     </c:if>
-                     <c:if test="${xn1!=null}">
-                     <h2 class="text-center">Danh sách đơn hàng đã xác nhận</h2>
-                    <table class="table table-hover">
-                        <thead>
-                          <tr>
-                          	<th scope="col col-md">Tên khách hàng</th>
-                            <th scope="col col-md">Tên điện thoai</th>
-                            <th scope="col col-md">Đơn giá</th>
-                            <th scope="col col-md">Số lượng mua</th>
-                            <th scope="col col-md">Thành tiền</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-	                      	<c:forEach items="${dsdxn}" var="o">
-	                          <tr>
-	                          	<td><div class="my-3">${o.hoten}</div></td>
-	                            <td><div class="my-3">${o.tendt}</div></td>
-	                            <td><div class="my-3">${o.gia}</div></td>
-	                            <td><div class="my-3">${o.soluongmua}</div></td>
-	                            <td><div class="my-3">${o.thanhtien}</div></td>
-	                          </tr>
-	                        </c:forEach>
-                        </tbody>
-                     </table>
-                     </c:if>
-                </div>
-        	</div>
-        </section>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <script>
-    $(document).ready(function () {
-      $('.owl-carousel').owlCarousel({
-        loop: true,
-        margin: 10,
-        nav: false,
-        dots: false,
-        responsiveClass: true,
-        responsive: {
-          0: {
-            items: 4,
-            // nav: true
-          },
-          600: {
-            items: 6,
-            // nav: false
-          },
-          1000: {
-            items: 8,
-            // nav: true,
-            loop: false,
-            margin: 20
-          }
-        }
-      })
-    })
-  </script>
+	
 </body>
 </html>

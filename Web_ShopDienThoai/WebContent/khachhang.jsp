@@ -133,11 +133,12 @@
 						<!-- <li class="nav-item"><a class="nav-link text-white linkl" href="themsanphamController">Thêm sản phẩm</a></li> -->
 						<li class="nav-item dropdown ">
 					          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-					            Thêm sản phẩm
+					            Thêm mới
 					          </a>
 					          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					            <li><a class="dropdown-item" href="themsanphamController?dt=dt">Thêm điện thoại mới</a></li>
 					            <li><a class="dropdown-item" href="themsanphamController?hang=dt">Thêm hãng điện thoại</a></li>
+					          	<li><a class="dropdown-item" href="themsanphamController?vc=vc">Thêm voucher</a></li>
 					          </ul>
 					     </li>
 					</ul>

@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.dienThoaiBean;
 import bean.loaiBean;
+import bean.loaiVoucherbean;
 import bo.dienThoaiBo;
 import bo.loaiBo;
+import bo.thongkebo;
 
 /**
  * Servlet implementation class themsanphamController
@@ -34,11 +36,14 @@ public class themsanphamController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		try {
 			loaiBo lb=new loaiBo();
 			ArrayList<loaiBean> dsloai=lb.getloai();
 			request.setAttribute("dsloai", dsloai);
 			dienThoaiBo dtbo=new dienThoaiBo();
+			//Thông tin điệ thoại
 			String maloai = request.getParameter("maloai");
 			String madt = request.getParameter("madt");
 			String tendt = request.getParameter("tendt");
@@ -52,17 +57,47 @@ public class themsanphamController extends HttpServlet {
 			String soluong =request.getParameter("soluong");
 			String dt1=request.getParameter("dt");
 			String hang=request.getParameter("hang");
+			//thông tin hãng mới
 			String mahang=request.getParameter("mahang");
 			String tenloai=request.getParameter("tenloai");
+			//thông tin voucher
+			String maloaivoucher = request.getParameter("maloaivoucher");
+			String tenvoucher = request.getParameter("tenvoucher");
+			String  giatri=request.getParameter("giatri");
+			String soluongvc = request.getParameter("soluongvc");
+			thongkebo tkbo=new thongkebo();
+			ArrayList<loaiVoucherbean> dsloaivoucher = tkbo.getloaivoucher();
+			request.setAttribute("dsloaivoucher", dsloaivoucher);
+			String vc = request.getParameter("vc");
+			String dsvou = request.getParameter("ds");
+			String xoavoucher = request.getParameter("mavoucher");
+			if(xoavoucher!=null) {
+				long mavoucher = Long.parseLong(xoavoucher);
+				long check = tkbo.checkVoucherMavorcher(mavoucher);
+				if(check!=0) {
+					tkbo.xoavoucher_khachhang(mavoucher);
+					tkbo.xoavoucher1(mavoucher);
+				}else {
+					tkbo.xoavoucher1(mavoucher);
+				}
+			}
+			
+			request.setAttribute("dsvou", dsvou);
+			request.setAttribute("dsvoucher", tkbo.getVoucher());
 			request.setAttribute("add",null);
 			request.setAttribute("hang", null);
 			request.setAttribute("addt",null);
 			request.setAttribute("addh",null);
+			request.setAttribute("voucher",null);
+			request.setAttribute("thieu", null);
 			if(dt1!=null) {
 				request.setAttribute("themdt", "dt");
 			}
 			if(hang!=null) {
 				request.setAttribute("hang", "dt");
+			}
+			if(vc!=null) {
+				request.setAttribute("vc", "vc");
 			}
 			if(maloai!=null && madt!=null &&tendt!=null &&gia!=null &&kichthuocman!=null && pin!=null && chip!=null &&ram!=null &&dungluong!=null &&hinhanh!=null && soluong!=null ) {
 				
@@ -97,6 +132,15 @@ public class themsanphamController extends HttpServlet {
 					request.setAttribute("trung", "trung");
 				}
 				request.setAttribute("addh", "jdskh");	
+			}
+			if(maloaivoucher==null) {
+				request.setAttribute("tenvoucher", tenvoucher);
+				request.setAttribute("giatri", giatri);
+				request.setAttribute("soluongvc", soluongvc);
+				request.setAttribute("thieu", "thieu");
+			}else if(maloaivoucher!=null && tenvoucher!=null && giatri!=null && soluongvc!=null) {
+				tkbo.insertvoucher1(tenvoucher, Long.parseLong(giatri), Long.parseLong(soluongvc), Long.parseLong(maloaivoucher));
+				request.setAttribute("voucher", "voucher");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

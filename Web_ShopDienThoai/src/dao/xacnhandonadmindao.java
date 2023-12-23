@@ -57,6 +57,15 @@ public class xacnhandonadmindao {
 		}
 		return ds;
 	}
+	public Long DoanhThu() throws Exception{
+		xacnhandonadmindao xndao = new xacnhandonadmindao();
+		long doanhthu =0;
+		ArrayList<xacnhanmuaAdminbean> ds = xndao.getdonhangdaxacnhan();
+		for (xacnhanmuaAdminbean x : ds) {
+			doanhthu+=x.getThanhtien();
+		}
+		return doanhthu;
+	}
 	public void XacNhanDon(long MaChiTietHD) throws Exception{
 		String query="update HoaDonChiTiet set damua=1 where machitiethoadon=?";
 		Connection conn = new KetNoi().getConnection();//mo ket noi voi sql
@@ -66,14 +75,30 @@ public class xacnhandonadmindao {
         ps.close();
         conn.close();
 	}
+	public xacnhanmuaAdminbean getdienthoaibanchay() throws Exception{
+		xacnhanmuaAdminbean ds= new xacnhanmuaAdminbean();
+		try {
+			String query = "select top 1 tendt,sum(soluongmua) as sl from view_xacnhandonhangAdmin where damua=1 group by tendt order by sl desc";
+			Connection conn = new KetNoi().getConnection();// mo ket noi voi sql
+			PreparedStatement ps = conn.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String tendt = rs.getString("tendt");
+				Long soluongmua = rs.getLong("sl");
+				ds=new xacnhanmuaAdminbean(null, null, tendt, null, soluongmua, null, null);
+			}
+			rs.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ds;
+	}
 	public static void main(String[] args) {
 		try {
 			xacnhandonadmindao xndao=new xacnhandonadmindao();
-			xndao.XacNhanDon(3);
-			ArrayList<xacnhanmuaAdminbean> ds= xndao.getdonhang();
-			for (xacnhanmuaAdminbean xn : ds) {
-				System.out.println(xn);
-			}
+			xacnhanmuaAdminbean ds = xndao.getdienthoaibanchay();
+			System.out.println(ds);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

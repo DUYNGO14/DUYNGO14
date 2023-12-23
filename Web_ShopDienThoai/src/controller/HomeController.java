@@ -9,12 +9,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.dienThoaiBean;
 import bean.loaiBean;
+import bean.xacnhanmuaAdminbean;
 import bo.dienThoaiBo;
 import bo.giohangbo;
 import bo.loaiBo;
+import bo.xacnhandonhangAdminbo;
 
 /**
  * Servlet implementation class HomeController
@@ -30,6 +33,7 @@ public class HomeController extends HttpServlet {
 		try {
 			request.setCharacterEncoding("utf-8");
 			response.setCharacterEncoding("utf-8");
+			HttpSession session= request.getSession();
 			loaiBo lbo=new loaiBo();
 			dienThoaiBo dtbo=new dienThoaiBo();
 			ArrayList<loaiBean> dsloai=lbo.getloai();
@@ -44,7 +48,7 @@ public class HomeController extends HttpServlet {
 			String soluongnew = request.getParameter("soluongnew");
 			request.setAttribute("madtupdate", madtupdate);
 			request.setAttribute("soluongnew", soluongnew);
-			
+			/* session.setAttribute("quyen",0); */
 			 if(madtupdate!=null && soluongnew!=null && Long.parseLong(soluongnew)>=0) {
 				 dtbo.updateSoluong(madtupdate,Long.parseLong(soluongnew)); 
 			 }
@@ -79,8 +83,11 @@ public class HomeController extends HttpServlet {
 			int max=0;
 
 			if(ml!=null) {
+				int k=0;
 				dsdt=dtbo.getMaLoai(ml, index);
 				max=dtbo.Countml(ml);
+				k=max;
+				request.setAttribute("k", k);
 			}else if((key!=null && key!="")|| (tk!=null&&index3!=null)) {
 				int k=0;
 				dsdt=dtbo.getTenDienThoai(key,index);
@@ -104,6 +111,11 @@ public class HomeController extends HttpServlet {
 			}else {
 				maxpage=(max/16)+1;
 			}
+			xacnhandonhangAdminbo xnbo = new xacnhandonhangAdminbo();
+			long dt = xnbo.DoanhThu();
+			xacnhanmuaAdminbean banchay = xnbo.getdienthoaibanchay();
+			request.setAttribute("banchay", banchay.getTendt());
+			request.setAttribute("doanhthu", dt);
 			giohangbo ghbo=new giohangbo();
 			request.setAttribute("dsdt", dsdt);
 			request.setAttribute("maxpage", maxpage);

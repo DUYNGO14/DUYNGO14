@@ -131,14 +131,14 @@
 						<li class="nav-item "><a class="nav-link active text-white linkl" aria-current="page" href="HomeController">Trang chủ</a></li>
 						<li class="nav-item"><a class="nav-link text-white linkl" href="khachhangcontroller">Khách hàng</a></li>
 						<li class="nav-item"><a class="nav-link text-white linkl" href="xacnhandonhangController?xn2=chua">Xác nhận đơn hàng</a></li>
-						<!-- <li class="nav-item"><a class="nav-link text-white linkl" href="themsanphamController">Thêm sản phẩm</a></li> -->
 						<li class="nav-item dropdown ">
 					          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-					            Thêm sản phẩm
+					            Thêm mới
 					          </a>
 					          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					            <li><a class="dropdown-item" href="themsanphamController?dt=dt">Thêm điện thoại mới</a></li>
 					            <li><a class="dropdown-item" href="themsanphamController?hang=dt">Thêm hãng điện thoại</a></li>
+					          	<li><a class="dropdown-item" href="themsanphamController?vc=vc">Thêm voucher</a></li>
 					          </ul>
 					     </li>
 					</ul>
@@ -203,10 +203,10 @@
 	       	 </div>
 	        </div>
 	            <c:if test="${trung!=null}">
-		        	<p class="text-white text-uppercase">Trùng mã sách!Vui lòng chọn mã sách khác.</p>
+		        	<p class="text-dark text-uppercase">Trùng mã sách!Vui lòng chọn mã sách khác.</p>
 		        </c:if>
 		        <c:if test="${add!=null}">
-		       		<p class="text-white text-uppercase">Thêm sản phẩm thành công!</p>
+		       		<p class="text-dark text-uppercase">Thêm sản phẩm thành công!</p>
 		       	</c:if>
 	          <div class="form-submit-btn">
 		          <div class="d-grid gap-2">
@@ -218,6 +218,14 @@
 	</section>
 	</c:if>
 	<c:if test="${hang!=null or addh!=null}">
+	<!-- <section class="container ml-3">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a href="themsanphamController?ds=vc"><button type="button" class="btn btn-outline-danger btn-sm">Danh sách hãng điện thoại</button></a></li>
+			    <li class="breadcrumb-item"><a href="themsanphamController?vc=vc"><button type="button" class="btn btn-outline-danger btn-sm">Thêm hãng</button></a></li>
+			  </ol>
+			</nav>
+	</section> -->
 	<section class="form-add"> 
 	     <div class="container1">
 	      <h1 class="form-title">THÊM HÃNG ĐIỆN THOẠI MỚI</h1>
@@ -233,10 +241,10 @@
 	          </div>
 	        </div>
 	          <c:if test="${trung!=null}">
-		        	<p class="text-white text-uppercase">Trùng mã sách!Vui lòng chọn mã sách khác.</p>
+		        	<p class="text-dark text-uppercase">Trùng mã sách!Vui lòng chọn mã sách khác.</p>
 		        </c:if>
 		        <c:if test="${hang1!=null}">
-		       		<p class="text-white text-uppercase">Thêm hãng mới thành công!</p>
+		       		<p class="text-dark text-uppercase">Thêm hãng mới thành công!</p>
 		       	</c:if>
 	          <div class="form-submit-btn">
 		          <div class="d-grid gap-2">
@@ -246,6 +254,91 @@
 	      </form>
 	    </div>
 	</section>
+	</c:if>
+	<c:if test="${vc!=null or voucher!=null or dsvou!=null}">
+		<section class="container ml-3">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a href="themsanphamController?ds=vc"><button type="button" class="btn btn-outline-danger btn-sm">Danh sách vorcher</button></a></li>
+			    <li class="breadcrumb-item"><a href="themsanphamController?vc=vc"><button type="button" class="btn btn-outline-danger btn-sm">Thêm voucher</button></a></li>
+			  </ol>
+			</nav>
+		</section>
+		<c:if test="${dsvou!=null}">
+		<h2 class="text-center">Danh sách voucher</h2>
+		<table class="table table-hover m-2">
+                        <thead>
+                          <tr>
+                          	<th scope="col col-md">Tên voucher</th>
+                            <th scope="col col-md">Giá trị khuyến mãi</th>
+                            <th scope="col col-md">Số lượng voucher</th>
+                            <th scope="col col-md">Loại voucher</th>
+                            <th scope="col col-md">Xóa voucher</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+	                      	<c:forEach items="${dsvoucher}" var="o">
+	                          <tr>
+	                          	<td><div class="my-2">${o.tenvoucher}</div></td>
+	                            <td><div class="my-2">${o.giatri} vnđ</div></td>
+	                            <td><div class="my-2">${o.soluong}</div></td>
+	                            <c:if test="${o.maloaivoucher==1}">
+	                            <td><div class="my-2">Giảm giá sản phẩm</div></td>
+	                            </c:if>
+	                            <c:if test="${o.maloaivoucher==2}">
+	                            <td><div class="my-2">Giảm phí vận chuyển</div></td>
+	                            </c:if>
+	                            <td>
+              	 	 				<a href="themsanphamController?ds=vc&mavoucher=${o.mavoucher}"><button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button></a>
+                    			</td>
+	                          </tr>
+	                        </c:forEach>
+                        </tbody>
+                     </table>
+		</c:if>
+		<c:if test="${vc!=null or voucher!=null}">
+		<section class="form-add"> 
+	     <div class="container1">
+	      <h1 class="form-title">THÊM VOURCHER MỚI</h1>
+	      <form action="themsanphamController" method="post">
+	        <div class="main-user-info">
+	          <div class="user-input-box">
+		          <label for="email">Tên loại voucher</label>
+		          <select name="maloaivoucher" id="disabledSelect" class="form-select">
+				      <option>Chọn loại voucher</option>
+				      <c:forEach items="${dsloaivoucher}" var="o">
+				      <option value="${o.maloaivoucher}">${o.tenloaivoucher}</option>
+				      </c:forEach>
+				   </select>
+		      </div>
+	          <div class="user-input-box">
+	            <label >Tên voucher</label>
+	            <input type="text" id="fullName" required name="tenvoucher" value="${tenvoucher}"  placeholder="Nhập tên voucher">
+	          </div>
+	          <div class="user-input-box">
+	            <label >Giá trị voucher<label>
+	            <input type="number" id="username" required name="giatri" value="${giatri}" placeholder="Nhập giá trị voucher">
+	          </div>
+	          <div class="user-input-box">
+	            <label >Số lượng voucher<label>
+	            <input type="number" id="username" required name="soluongvc" value="${soluong}" placeholder="Nhập số lượng voucher">
+	          </div>
+	        </div>
+	        	<c:if test="${thieu!=null}">
+	        		<p class="text-dark text-uppercase">Vui lòng chọn loại voucher!</p>
+	        	</c:if>
+		       <c:if test="${voucher!=null}">
+		       		<p class="text-dark text-uppercase">Thêm voucher mới thành công!</p>
+		       	</c:if>
+	          <div class="form-submit-btn">
+		          <div class="d-grid gap-2">
+					  <button class="btn btn-success" type="submit">Thêm voucher mới</button>
+				 </div>
+	         </div>
+	      </form>
+	    </div>
+	</section>
+	</c:if>
 	</c:if>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script>

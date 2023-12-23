@@ -247,8 +247,7 @@
         <c:if test="${kt!=null}">
         <p class="fw-bold text-danger">Vui lòng nhập đầy đủ thông tin!</p>
         </c:if>
-        <input type="submit" value="Thanh toán ${tien}vnđ" class="submit-btn">
-
+        <input type="submit" value="Thanh toán ${tong}vnđ" class="submit-btn">
     </form>
 </body>
 </html>

@@ -16,6 +16,7 @@ import bean.loaiBean;
 import bo.dienThoaiBo;
 import bo.khachhangbo;
 import bo.loaiBo;
+import bo.thongkebo;
 
 /**
  * Servlet implementation class ThanhToanController
@@ -45,6 +46,20 @@ public class ThanhToanController extends HttpServlet {
 			request.setAttribute("dsloai", dsloai);
 			String tien = request.getParameter("tt");
 			request.setAttribute("tien", tien);
+			String vc = request.getParameter("vc");
+			request.setAttribute("vc", vc);
+			String mavc = request.getParameter("mavc");
+			thongkebo tkbo=new thongkebo();
+			if(mavc!=null) {
+				tkbo.xoavoucher(Long.parseLong(mavc));
+			}
+			long tong =0;
+			if(vc!=null && tien!=null) {
+				tong = Long.parseLong(tien)-Long.parseLong(vc);
+			}else if(tien!=null && vc==null) {
+				tong = Long.parseLong(tien);
+			}
+			request.setAttribute("tong", tong);
 			khachhangbo khbo=new khachhangbo();
 			long makh= (long)session.getAttribute("makh");
 			khachhangbean kh= khbo.getKhachHangma(makh);
