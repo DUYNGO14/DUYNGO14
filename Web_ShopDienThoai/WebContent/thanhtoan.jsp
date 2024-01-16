@@ -30,6 +30,9 @@
 <script src="/assets/vendors/jquery.min.js"></script>
 <script src="/assets/owlcarousel/owl.carousel.js"></script>
 <link href="css-jsp/thanhtoan.css" rel="stylesheet"> 
+<link rel="icon" type="image/png" sizes="16x16"  href="favicons/favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
 <title>Thanh toán</title>
 </head>
 
@@ -38,7 +41,7 @@
 		<div class="container py-3">
 			<div class="row">
 				<div class="col-md-3 ">
-					<a href="HomeController"> <img src="image/logo.png"
+					<a href="HomeController"> <img src="image/logo5.png"
 						class="img-fluid " alt="Logo"></a>
 				</div>
 				<div class="col-md-4">
@@ -183,36 +186,22 @@
 
                 <div class="inputBox">
                     <span>full name :</span>
-                    <input type="text" required placeholder="Họ và tên" name="txtname">
+                    <input type="text" required placeholder="Họ và tên" name="txtname" value="${khachhang.hoten}">
                 </div>
                 <div class="inputBox">
                     <span>email :</span>
-                    <input type="email" required placeholder="example@example.com" name="txtemail">
+                    <input type="email" required value="${khachhang.email}" placeholder="example@example.com" name="txtemail">
                 </div>
                 <div class="inputBox">
                     <span>address :</span>
-                    <input type="text" required placeholder="room - street - locality" name="txtdiachi">
+                    <input type="text" required value="${khachhang.diachi}" placeholder="room - street - locality" name="txtdiachi">
                 </div>
                 <div class="inputBox">
                     <span>Number phone :</span>
-                    <input type="text" required placeholder="01234567" name="txtsdt">
+                    <input type="text" required value="${khachhang.sdt}" placeholder="01234567" name="txtsdt">
                 </div>
-
-                <div class="flex">
-                    <div class="inputBox">
-                        <span>state :</span>
-                        <input type="text" required placeholder="india" name="txtstate">
-                    </div>
-                    <div class="inputBox">
-                        <span>zip code :</span>
-                        <input type="text" required placeholder="123 456" name="txtzip">
-                    </div>
-                </div>
-
             </div>
-
             <div class="col">
-
                 <h3 class="title">payment</h3>
 
                 <div class="inputBox">
@@ -231,23 +220,12 @@
                     <span>exp month :</span>
                     <input type="text" required placeholder="january" name="txtexp">
                 </div>
-
-                <div class="flex">
-                    <div class="inputBox">
-                        <span>exp year :</span>
-                        <input type="number" required placeholder="2022" name="txtyear">
-                    </div>
-                    <div class="inputBox">
-                        <span>CVV :</span>
-                        <input type="text" required placeholder="1234" name="txtcvv">
-                    </div>
-                </div>
             </div>
         </div>
         <c:if test="${kt!=null}">
         <p class="fw-bold text-danger">Vui lòng nhập đầy đủ thông tin!</p>
         </c:if>
-        <input type="submit" value="Thanh toán ${tong}vnđ" class="submit-btn">
+        <input type="submit" value="Thanh toán ${tong}" class="submit-btn">
     </form>
 </body>
 </html>

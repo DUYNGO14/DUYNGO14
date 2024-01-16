@@ -3,7 +3,9 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import bean.dienThoaiBean;
 import bean.khachhangbean;
@@ -201,14 +203,84 @@ public class thongkedao {
 		ps.close();
 		conn.close();
 	}
+	public int Checkdienthoai(String maloai) throws Exception{
+		String query = "select count(*) from dienthoai where maloai=?";
+		try {
+			Connection conn = new KetNoi().getConnection();// mo ket noi voi sql
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setString(1, maloai);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				return rs.getInt(1);
+			}
+			rs.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+	public void xoadienthoaitheomaloai(String maloai) throws Exception{
+		String query="delete dienthoai where maloai=?";
+		Connection conn = new KetNoi().getConnection();// mo ket noi voi sql
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setString(1, maloai);
+		ps.executeUpdate();
+		ps.close();
+		conn.close();
+	}
+	public void xoaloaidienthoai(String maloai) throws Exception{
+		String query="delete loai where maloai=?";
+		Connection conn = new KetNoi().getConnection();// mo ket noi voi sql
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setString(1, maloai);
+		ps.executeUpdate();
+		ps.close();
+		conn.close();
+	}
+	public void updateloaidienthoai(String newtenloai,String maloai) throws Exception{
+		String query="UPDATE loai SET tenloai=?  WHERE maloai=?";
+		Connection conn = new KetNoi().getConnection();// mo ket noi voi sql
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setString(1, newtenloai);
+		ps.setString(2, maloai);
+		ps.executeUpdate();
+		ps.close();
+		conn.close();
+	}
+	public void updatedienthoai(String tendt,long gia,double kichthuocman,long pin,String maloai,String chip,long ram,long dungluong,String anh,long soluong,String madt) throws Exception{
+		String query="update dienthoai set tendt=?,gia=?,kichthuocman=?,pin=?,maloai=?,chip=?,ram=?,dungluong=?,anh=?,soluong=? where madt=?";
+		Connection conn = new KetNoi().getConnection();// mo ket noi voi sql
+		PreparedStatement ps = conn.prepareStatement(query);
+		ps.setString(1, tendt);
+		ps.setLong(2, gia);
+		ps.setDouble(3, kichthuocman);
+		ps.setLong(4, pin);
+		ps.setString(5,maloai);
+		ps.setString(6,chip);
+		ps.setLong(7, ram);
+		ps.setLong(8, dungluong);
+		ps.setString(9,anh);
+		ps.setLong(10, soluong);
+		ps.setString(11,madt);
+		ps.executeUpdate();
+		ps.close();
+		conn.close();
+	}
+	public String dinhdangtien(long l) throws Exception{
+		Locale locale = new Locale("vi", "VN");
+		NumberFormat format = NumberFormat.getCurrencyInstance(locale);
+		return format.format(l);
+	}
 	public static void main(String[] args) {
 		try {
 			thongkedao tkdao=new thongkedao();
-			System.out.println(tkdao.checkVoucherMavorcher(2));
-			tkdao.xoavoucher_khachhang(2);
-			tkdao.xoavoucher1(2);
+			System.out.println(tkdao.dinhdangtien(1899999));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	 
 }

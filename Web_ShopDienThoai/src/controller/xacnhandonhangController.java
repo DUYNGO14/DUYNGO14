@@ -40,7 +40,9 @@ public class xacnhandonhangController extends HttpServlet {
 			request.setAttribute("dsloai", dsloai);
 			xacnhandonhangAdminbo xnbo=new xacnhandonhangAdminbo();
 			ArrayList<xacnhanmuaAdminbean> ds = xnbo.getdonhang();
+			request.setAttribute("sodonxn", ds.size());
 			ArrayList<xacnhanmuaAdminbean> dsdxn = xnbo.getdonhangdaxacnhan();
+			request.setAttribute("sodondxn", dsdxn.size());
 			String xn1=request.getParameter("xn1");
 			String xn2=request.getParameter("xn2");
 			request.setAttribute("xn1", xn1);

@@ -1,7 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,11 +43,14 @@ public class ThanhToanController extends HttpServlet {
 			HttpSession session = request.getSession();
 			request.setCharacterEncoding("utf-8");
 			response.setCharacterEncoding("utf-8");
+			Locale localeVN = new Locale("vi", "VN");
+			NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
 			loaiBo lbo = new loaiBo();
 			ArrayList<loaiBean> dsloai=lbo.getloai();
 			request.setAttribute("dsloai", dsloai);
 			String tien = request.getParameter("tt");
 			request.setAttribute("tien", tien);
+			long tien1 = Long.parseLong(tien);
 			String vc = request.getParameter("vc");
 			request.setAttribute("vc", vc);
 			String mavc = request.getParameter("mavc");
@@ -53,12 +58,7 @@ public class ThanhToanController extends HttpServlet {
 			if(mavc!=null) {
 				tkbo.xoavoucher(Long.parseLong(mavc));
 			}
-			long tong =0;
-			if(vc!=null && tien!=null) {
-				tong = Long.parseLong(tien)-Long.parseLong(vc);
-			}else if(tien!=null && vc==null) {
-				tong = Long.parseLong(tien);
-			}
+			String tong = currencyVN.format(tien1);
 			request.setAttribute("tong", tong);
 			khachhangbo khbo=new khachhangbo();
 			long makh= (long)session.getAttribute("makh");

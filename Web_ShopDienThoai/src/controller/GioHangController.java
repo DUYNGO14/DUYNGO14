@@ -1,8 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
-
+import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -89,9 +90,21 @@ public class GioHangController extends HttpServlet {
 					ghbo.Themhang(madt, tendt, Long.parseLong(gia), Double.parseDouble(kichthuocman),Long.parseLong(pin),ml,chip,Long.parseLong(ram),Long.parseLong(dungluong),anh,soluong);
 					session.setAttribute("gh", ghbo);
 				}
+				Locale localeVN = new Locale("vi", "VN");
+				NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+				/*
+				 * String str1 = currencyVN.format(); System.out.println("Số " + vnd +
+				 * " sau khi định dạng = " + str1);
+				 * System.out.println("Kiểu đơn vị tiền tệ của " + localeVN.getCountry() +
+				 * " là " + currencyVN.getCurrency());
+				 */
 				if(session.getAttribute("gh")!=null) {
 					ghbo=(giohangdao)session.getAttribute("gh");
 					request.setAttribute("ghbo", ghbo);
+					long tongtien = ghbo.Tongtien();
+					String str1 = currencyVN.format(tongtien);
+					request.setAttribute("str1", str1);
+					request.setAttribute("tongtien", tongtien);
 					RequestDispatcher rd=request.getRequestDispatcher("giohang.jsp");
 					rd.forward(request, response);
 				}else {

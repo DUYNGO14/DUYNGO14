@@ -52,14 +52,18 @@ public class XacNhanDatMuaController extends HttpServlet {
 				String email =request.getParameter("txtemail");
 				String sdt =request.getParameter("txtsdt");
 				String diachi  =request.getParameter("txtdiachi");
-				String state =request.getParameter("txtstate");
-				String zip =request.getParameter("txtzip");
+				/*
+				 * String state =request.getParameter("txtstate"); String zip
+				 * =request.getParameter("txtzip");
+				 */
 				String namecard =request.getParameter("txtnamecard");
 				String exp =request.getParameter("txtexp");
 				String cardnumber =request.getParameter("txtcard");
-				String expyear =request.getParameter("txtyear");
-				String cvv =request.getParameter("txtcvv");
-				if(hoten!=null && email!=null && sdt!=null && diachi!=null && state!=null && zip!=null && namecard!=null && exp!=null  && cardnumber!=null && expyear!=null && cvv!=null) {
+				/*
+				 * String expyear =request.getParameter("txtyear"); String cvv
+				 * =request.getParameter("txtcvv");
+				 */
+				if(hoten!=null && email!=null && sdt!=null && diachi!=null  && namecard!=null && exp!=null  && cardnumber!=null ) {
 					dmbo.HoaDon(makh);
 					dmbo.UpdateKhachHang(diachi,sdt,makh);
 					long maxhd = dmbo.MaHoaDon();

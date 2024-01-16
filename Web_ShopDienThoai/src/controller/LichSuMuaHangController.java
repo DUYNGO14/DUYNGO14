@@ -47,6 +47,7 @@ public class LichSuMuaHangController extends HttpServlet {
 				lichsumuahangbo lsbo=new lichsumuahangbo();
 				long makh = (long)session.getAttribute("makh");
 				ArrayList<lichsubean> dsls= lsbo.getLichSu(makh);
+				request.setAttribute("dem", dsls.size());
 				request.setAttribute("dsls", dsls);
 				RequestDispatcher rd=request.getRequestDispatcher("lichsu.jsp");
 				rd.forward(request, response);

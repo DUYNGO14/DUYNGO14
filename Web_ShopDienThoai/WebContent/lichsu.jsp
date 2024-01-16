@@ -28,6 +28,9 @@
 	href="/assets/owlcarousel/assets/owl.theme.default.min.css">
 <script src="/assets/vendors/jquery.min.js"></script>
 <script src="/assets/owlcarousel/owl.carousel.js"></script>
+<link rel="icon" type="image/png" sizes="16x16"  href="favicons/favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
 <title>Lịch sử</title>
 </head>
 
@@ -36,7 +39,7 @@
 		<div class="container py-3">
 			<div class="row">
 				<div class="col-md-3 ">
-					<a href="HomeController"> <img src="image/logo.png"
+					<a href="HomeController"> <img src="image/logo5.png"
 						class="img-fluid " alt="Logo"></a>
 				</div>
 				<div class="col-md-2"></div>
@@ -152,7 +155,7 @@
 	<!-- cart -->
     <div class="main_index">
         <section class="bread-crum">
-            <div class="container">
+            <div class="container border-bottom border-danger">
                 <div class="row pt-3">
                     <div class="col-12 a-left">
                         <ul class="breadcrumb">
@@ -175,9 +178,17 @@
                 </div>
            </div>
         </section>
-        <section class="product-cart border-bottom border-danger border-3">
+        <section class="product-cart border-bottom border-danger ">
             <div class="container">
                 <div class="row pt-3">
+                	<c:if test="${dem==0}">
+                	<div class="mb-3">
+			        		<div style="font-size: 100px; color: red" align="center" ><i class="fa-brands fa-shopify"></i></div>		
+							<div style="font-size: 20px; color: red" align="center">Chưa mua sản phẩm nào!</div>
+							<div align="center"><a href="HomeController"><button type="button" class="btn btn-danger" name="Mua ngay">Mua thêm</button></a></div>
+			        </div>
+                	</c:if>
+                	<c:if test="${dem!=0}">
                     <table class="table ">
                         <thead>
                           <tr>
@@ -210,8 +221,38 @@
                         </tbody>
                         </c:forEach>
                       </table>
+                      </c:if>
                 </div>
                 </div>
         </section>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function () {
+      $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: false,
+        dots: false,
+        responsiveClass: true,
+        responsive: {
+          0: {
+            items: 4,
+            // nav: true
+          },
+          600: {
+            items: 6,
+            // nav: false
+          },
+          1000: {
+            items: 8,
+            // nav: true,
+            loop: false,
+            margin: 20
+          }
+        }
+      })
+    })
+  </script>
 </body>
 </html>

@@ -29,6 +29,9 @@
 	href="/assets/owlcarousel/assets/owl.theme.default.min.css">
 <script src="/assets/vendors/jquery.min.js"></script>
 <script src="/assets/owlcarousel/owl.carousel.js"></script>
+<link rel="icon" type="image/png" sizes="16x16"  href="favicons/favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
 <title>Giỏ hàng</title>
 </head>
 
@@ -37,7 +40,7 @@
 		<div class="container py-3">
 			<div class="row">
 				<div class="col-md-3 ">
-					<a href="HomeController"> <img src="image/logo.png"
+					<a href="HomeController"> <img src="image/logo5.png"
 						class="img-fluid " alt="Logo"></a>
 				</div>
 				<div class="col-md-2"></div>
@@ -153,7 +156,7 @@
 	<!-- cart -->
     <div class="main_index">
         <section class="bread-crum">
-            <div class="container">
+            <div class="container border-bottom border-danger mb-3">
                 <div class="row pt-3">
                     <div class="col-12 a-left">
                         <ul class="breadcrumb">
@@ -233,7 +236,6 @@
                             </td>
                             <td  ><div class="mt-5 text-danger"><%=gh.getThanhtien() %></div></td>
                             <td>
-                            	<!-- <div class="mt-5"><a href="XoaSuaController" class="text-danger"> <i class="fa-solid fa-trash"></i></a></div> -->
                             	<button class="btn btn-outline-black mt-5" name="xoa" type="submit" value="<%=gh.getMadt()%>"><i class="fa-solid fa-trash text-danger"></i></button>
                             </td>
                           </tr>
@@ -253,7 +255,7 @@
                     <div class="col-md-4 mt-3">
                         <div class="row mb-3">
                             <div class="col-md-5 fs-5">Tổng tiền:</div>
-                            <div class="col-md-7 fs-5 text-danger"><%=ghbo.Tongtien() %>vnđ</div>
+                            <div class="col-md-7 fs-5 text-danger">${str1}</div>
                         </div>
                         <span>-</span>
                         <div class="row mb-3 mr-3">
@@ -271,19 +273,19 @@
                         <div class="row mb-3">
                             <div class="col-md-5 fs-5">Thanh toán:  </div>
                             <c:if test="${giatri!=null}">
-                            <div class="col-md-7 fs-5 text-danger"><%=ghbo.Tongtien() %> - ${giatri }</div>
+                            <div class="col-md-7 fs-5 text-danger">${tongtien - giatri}</div>
                             </c:if>
                             <c:if test="${giatri==null}">
-                            <div class="col-md-7 fs-5 text-danger"><%=ghbo.Tongtien() %></div>
+                            <div class="col-md-7 fs-5 text-danger">${str1}</div>
                             </c:if>
                         </div>
                         <div class="thanhtoan text-end row">
                         <div class="col-md-4">
                         <c:if test="${giatri!=null}">
-                            <a href="ThanhToanController?tt=<%=ghbo.Tongtien()%>&vc=${giatri}&mavc=${mavc}"><button type="button" class="btn btn-danger w-100">Thanh toán</button></a>
+                            <a href="ThanhToanController?tt=${tongtien - giatri}&mavc=${mavc}"><button type="button" class="btn btn-danger w-100">Thanh toán</button></a>
                         </c:if>
                         <c:if test="${giatri==null}">
-                            <a href="ThanhToanController?tt=<%=ghbo.Tongtien()%>"><button type="button" class="btn btn-danger w-100">Thanh toán</button></a>
+                            <a href="ThanhToanController?tt=${tongtien}"><button type="button" class="btn btn-danger w-100">Thanh toán</button></a>
                         </c:if>
                         </div>
                          <div class="col-md-4">

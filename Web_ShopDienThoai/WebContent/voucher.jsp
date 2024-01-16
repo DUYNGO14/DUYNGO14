@@ -29,6 +29,9 @@
 	href="/assets/owlcarousel/assets/owl.theme.default.min.css">
 <script src="/assets/vendors/jquery.min.js"></script>
 <script src="/assets/owlcarousel/owl.carousel.js"></script>
+<link rel="icon" type="image/png" sizes="16x16"  href="favicons/favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
 <title>voucher</title>
 </head>
 <body>
@@ -36,7 +39,7 @@
 		<div class="container py-3">
 			<div class="row">
 				<div class="col-md-3 ">
-					<a href="HomeController"> <img src="image/logo.png"
+					<a href="HomeController"> <img src="image/logo5.png"
 						class="img-fluid " alt="Logo"></a>
 				</div>
 				<div class="col-md-2"></div>
@@ -184,14 +187,15 @@
           </div>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="image/slider_1.webp" class="d-block w-100" alt="...">
+              <img src="image/slider_3.png" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
+              <img src="image/slider_2.png" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item ">
               <img src="image/slider_1.webp" class="d-block w-100" alt="...">
             </div>
-            <div class="carousel-item">
-              <img src="image/slider_1.webp" class="d-block w-100" alt="...">
-            </div>
+            
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
             data-bs-slide="prev">

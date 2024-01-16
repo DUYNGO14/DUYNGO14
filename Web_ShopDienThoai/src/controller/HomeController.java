@@ -1,7 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,6 +35,8 @@ public class HomeController extends HttpServlet {
 		try {
 			request.setCharacterEncoding("utf-8");
 			response.setCharacterEncoding("utf-8");
+			Locale localeVN = new Locale("vi", "VN");
+			NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
 			HttpSession session= request.getSession();
 			loaiBo lbo=new loaiBo();
 			dienThoaiBo dtbo=new dienThoaiBo();
@@ -115,7 +119,7 @@ public class HomeController extends HttpServlet {
 			long dt = xnbo.DoanhThu();
 			xacnhanmuaAdminbean banchay = xnbo.getdienthoaibanchay();
 			request.setAttribute("banchay", banchay.getTendt());
-			request.setAttribute("doanhthu", dt);
+			request.setAttribute("doanhthu", currencyVN.format(dt));
 			giohangbo ghbo=new giohangbo();
 			request.setAttribute("dsdt", dsdt);
 			request.setAttribute("maxpage", maxpage);

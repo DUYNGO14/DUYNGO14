@@ -16,4 +16,7 @@ public class loaiBo {
 	public loaiBean TimMaLoai(String maloai) throws Exception{
 		return ldao.TimMaLoai(maloai);
 	}
+	public String Tenloai(String maloai) throws Exception{
+		return ldao.Tenloai(maloai);
+	}
 }

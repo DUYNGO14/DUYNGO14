@@ -28,6 +28,9 @@
 	href="/assets/owlcarousel/assets/owl.theme.default.min.css">
 <script src="/assets/vendors/jquery.min.js"></script>
 <script src="/assets/owlcarousel/owl.carousel.js"></script>
+<link rel="icon" type="image/png" sizes="16x16"  href="favicons/favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
 <title>Xác nhận admin</title>
 </head>
 <body>
@@ -35,7 +38,7 @@
 		<div class="container py-3">
 			<div class="row">
 				<div class="col-md-3 ">
-					<a href="HomeController"> <img src="image/logo.png"
+					<a href="HomeController"> <img src="image/logo5.png"
 						class="img-fluid " alt="Logo"></a>
 				</div>
 				<div class="col-md-2"></div>
@@ -141,49 +144,29 @@
 					            <li><a class="dropdown-item" href="themsanphamController?vc=vc">Thêm voucher</a></li>
 					          </ul>
 					     </li>
+					     <li class="nav-item"><a class="nav-link text-white linkl" href="danhsachdanhgiaController">Đánh giá</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</section>
 	
-	<section class="mymaincontent my-3">
-		<div class="container">
-      <div class="slider mb-3">
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-              aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-              aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-              aria-label="Slide 3"></button>
-          </div>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="image/slider_1.webp" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="image/slider_1.webp" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="image/slider_1.webp" class="d-block w-100" alt="...">
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-          </div>
-        </div>
-      </div>
-	</section>
+	
+	<section class="bread-crum">
+            <div class="container border-bottom border-danger mb-3">
+                <div class="row pt-3">
+                    <div class="col-12 a-left">
+                        <ul class="breadcrumb">
+                            <li class="home ">
+                                <a class="text-decoration-none" href="HomeController"><span class="text-dark">Trang chủ</span></a>
+                                <span class="mr_lr">&nbsp;/&nbsp;</span>
+                            </li>
+                            <li><span  class="text-warning">Xác nhận đơn hàng admin</span></li>
+                        </ul>
+                    </div>
+                </div>
+               </div>
+        </section>
 	<section class="container ml-3">
 	<nav aria-label="breadcrumb">
 	  <ol class="breadcrumb">
@@ -197,6 +180,12 @@
                 <div class="row pt-3">
                 	<c:if test="${xn2!=null}">
                 	<h2 class="text-center">Danh sách đơn hàng cần xác nhận</h2>
+                	<c:if test="${sodonxn==0}">
+                	<div class="mb-3">
+							<div style="font-size: 20px; color: red" align="center">Không có đơn hàng!</div>
+			        </div>
+                	</c:if>
+                	<c:if test="${sodonxn!=0}">
                     <table class="table table-hover ">
                         <thead>
                           <tr>
@@ -222,8 +211,16 @@
                         </tbody>
                      </table>
                      </c:if>
+                     </c:if>
                      <c:if test="${xn1!=null}">
+
                      <h2 class="text-center">Danh sách đơn hàng đã xác nhận</h2>
+                     <c:if test="${sodondxn==0}">
+                     	<div class="mb-3">
+							<div style="font-size: 20px; color: red" align="center">Chưa bán được đơn hàng!</div>
+			        	</div>
+                     </c:if>
+                    <c:if test="${sodondxn!=0}">
                     <table class="table table-hover">
                         <thead>
                           <tr>
@@ -246,6 +243,7 @@
 	                        </c:forEach>
                         </tbody>
                      </table>
+                     </c:if>
                      </c:if>
                 </div>
         	</div>

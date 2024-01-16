@@ -1,3 +1,4 @@
+<%@page import="bo.thongkebo"%>
 <%@page import="dao.giohangdao"%>
 <%@page import="bean.giohangbean"%>
 <%@page import="bo.giohangbo"%>
@@ -28,6 +29,9 @@
 	href="/assets/owlcarousel/assets/owl.theme.default.min.css">
 <script src="/assets/vendors/jquery.min.js"></script>
 <script src="/assets/owlcarousel/owl.carousel.js"></script>
+<link rel="icon" type="image/png" sizes="16x16"  href="favicons/favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
 <title>Trang chủ</title>
 </head>
 
@@ -36,7 +40,7 @@
 		<div class="container py-3">
 			<div class="row">
 				<div class="col-md-3 ">
-					<a href="HomeController"> <img src="image/logo.png"
+					<a href="HomeController"> <img src="image/logo5.png"
 						class="img-fluid " alt="Logo"></a>
 				</div>
 				<div class="col-md-2"></div>
@@ -95,7 +99,7 @@
 							<div class="row">
 								<div class="col-3">
 									<div class="fs-3 text-danger">
-										<i class="fa-solid fa-right-to-bracket"></i>
+										<a href="dangxuat.jsp" class="text-decoration-none text-danger"><i class="fa-solid fa-right-to-bracket"></i></a>
 									</div>
 								</div>
 								<div class="col-9 mt-2">
@@ -126,7 +130,7 @@
 			            </ul>
 			          </div>
 				</div>
-				<c:if test="${quyen==0}">
+				<c:if test="${quyen==0 or quyen==null}">
 				<div class="col-md-9 ">
 					<ul class="nav justify-content-end mt-2">
 						<li class="nav-item "><a class="nav-link active text-white linkl" aria-current="page" href="HomeController">Trang chủ</a></li>
@@ -164,13 +168,14 @@
 					            <li><a class="dropdown-item" href="themsanphamController?vc=vc">Thêm voucher</a></li>
 					          </ul>
 					     </li>
+					     <li class="nav-item"><a class="nav-link text-white linkl" href="danhsachdanhgiaController">Đánh giá</a></li>
 					</ul>
 				</div>
 				</c:if>
 			</div>
 		</div>
 	</section>
-	
+	<c:if test="${quyen==0 or quyen==null}">
 	<section class="mymaincontent my-3">
 		<div class="container">
       <div class="slider mb-3">
@@ -185,12 +190,12 @@
           </div>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="image/slider_1.webp" class="d-block w-100" alt="...">
+              <img src="image/slider_3.png" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-              <img src="image/slider_1.webp" class="d-block w-100" alt="...">
+              <img src="image/slider_2.png" class="d-block w-100" alt="...">
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item ">
               <img src="image/slider_1.webp" class="d-block w-100" alt="...">
             </div>
           </div>
@@ -208,16 +213,21 @@
         </div>
       </div>
 	</section>
+	</c:if>
 	<!-- Begin san pham -->
 	
 	<section class="mymaincontent my-3 mx-5"> 
-	<c:if test="${quyen==0}">
+	<img class="mx-auto" alt="" src="image/Dien_thoai.png" style="width: 100%;">
+	<c:if test="${quyen==0 or quyen==null}">
 		<div class="product-list mb-3">
 	        <div class="product_title border-bottom">
 	          <div class="col-md-3 mx-5 my-3">
-	            <Strong class="bg-danger text-white p-2"><i class="fa-solid fa-mobile-screen-button"></i>  Điện thoại</Strong>
+	            <!-- <Strong class="bg-danger text-white p-2"><i class="fa-solid fa-mobile-screen-button"></i>  Điện thoại</Strong> -->
+	            <a href="HomeController">
+			     <button type="button" class="btn btn-danger">Tất cả sản phẩm</button>
+			    </a>
 	          </div>
-	          <div class="col-md-8 ">
+	          <div class="col-md-6 ">
 	          </div>
 	        </div>
 	    </div>
@@ -236,7 +246,7 @@
 		    		<c:forEach items="${dsdt}" var="o">
 				    	<div class="col-12 col-md-6 col-lg-3 mb-4 ">
 				    	  <p class="fw-lighter">Trả góp 0%</p>
-			              <a href="ThongTinSanPhamConTroller?mdt=${o.madt}"><img src="${o.anh}" alt="nah" width="173px" height="225px"></a>
+			              <a href="ThongTinSanPhamConTroller?mdt=${o.madt}"><img class="anhdienthoai" src="${o.anh}" alt="nah" width="173px" height="225px"></a>
 			              <h4 class="card-title show_txt" >
 							 <a href="ThongTinSanPhamConTroller?mdt=${o.madt}" class=" text-decoration-none text-dark fs-6 " title="View Product">${o.tendt}</a>
 						  </h4>
@@ -283,12 +293,15 @@
 	    		</c:when>
 	    <c:otherwise>
 	    <div class="ml-3">
-	     <button type="button" class="btn btn-lg btn-outline-primary" disabled>
-	    	<div>Doanh thu : ${doanhthu} VNĐ</div>
+	     <button type="button" class="btn btn-sm btn-outline-primary" disabled>
+	    	<div>Doanh thu : ${doanhthu}</div>
 	     </button>
-	     <button type="button" class="btn btn-lg btn-outline-danger" disabled>
+	     <button type="button" class="btn btn-sm btn-outline-danger" disabled>
 	    	<div>Mặt hàng bán chạy: ${banchay}</div>
 	     </button>
+	     <a href="HomeController">
+	     <button type="button" class="btn btn-sm btn-outline-danger">Tất cả</button>
+	     </a>
 	     </div>
     	 <table class="table table-hover">
 			  <thead>
@@ -298,7 +311,7 @@
 			      <th scope="col">Giá</th>
 			      <th scope="col">Số lượng còn</th>
 			      <th scope="col">Xóa sản phẩm</th>
-			      <th scope="col">Cập nhật số lượng</th>
+			      <th scope="col">Cập nhật</th>
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -317,60 +330,15 @@
               	 	 	</td>
               	 	 	<td><div class="mt-5">${o.gia}vnđ</div></td>
               	 	 	<td>
-              	 	 		<div class="mt-5 text-danger">${o.soluong} chiếc
-              	 	 		<c:if test="${o.soluong<5}"> (Số lượng còn ít) </c:if>
+              	 	 		<div class="mt-5">${o.soluong} chiếc
+              	 	 		<c:if test="${o.soluong<5}"><p class="text-danger"> (Số lượng còn ít)</p> </c:if>
               	 	 		</div>
               	 	 	</td>
               	 	 	<td>
               	 	 		<a href="HomeController?madtdelete=${o.madt}"><button type="submit" class="btn btn-danger mt-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button></a>
                     	</td>
                     	<td>
-							<!-- Modal -->
-							<button type="button" class="btn btn-danger mt-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
-							 Update
-							</button>
-							<form action="HomeController" method="post">
-							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-							  <div class="modal-dialog">
-							    <div class="modal-content">
-							      <div class="modal-header">
-							        <h5 class="modal-title" id="exampleModalLabel">Thêm số lượng</h5>
-							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-							      </div>
-							      <div class="modal-body">
-							      	<div class="row g-3 align-items-center mb-3">
-									  <div class="col-auto">
-									    <label for="inputPassword6" class="col-form-label">Mã điện thoại</label>
-									  </div>
-									  <div class="col-auto">
-									    <input type="text"   id="inputPassword6" name="madtupdate" value="${o.madt}" class="form-control" aria-describedby="passwordHelpInline">
-									  </div>
-									</div>
-									<div class="row g-3 align-items-center mb-3">
-									  <div class="col-auto">
-									    <label for="inputPassword6" class="col-form-label">Số lượng cũ</label>
-									  </div>
-									  <div class="col-auto">
-									    <input type="text" disabled="disabled"  id="inputPassword6" name="soluongcu" value="${o.soluong}" class="form-control" aria-describedby="passwordHelpInline">
-									  </div>
-									</div>
-							     	<div class="row g-3 align-items-center mb-3">
-									  <div class="col-auto">
-									    <label for="inputPassword6" class="col-form-label">Số lượng mới</label>
-									  </div>
-									  <div class="col-auto">
-									    <input type="number" required id="inputPassword6" name="soluongnew" value="${soluongnew}" class="form-control" aria-describedby="passwordHelpInline">
-									  </div>
-									</div>
-							      </div>
-							      <div class="modal-footer">
-							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-							        <button type="submit" class="btn btn-primary">Save</button>
-							      </div>
-							    </div>
-							  </div>
-							</div>
-							</form>
+                    		<a href="capnhatController?updatedienthoai=vc&madt=${o.madt}"><button type="submit" class="btn btn-danger mt-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button></a>
                     	</td>
               	 	 </tr>
 	           </c:forEach>	     

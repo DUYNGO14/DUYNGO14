@@ -81,6 +81,8 @@ public class DangNhapController extends HttpServlet {
 						request.setAttribute("kt", "Đăng nhập sai!");
 					}
 				}
+			}else if(q==null){
+				request.setAttribute("thieuquyen", "thieuquyen");
 			}
 			
 			RequestDispatcher rd = request.getRequestDispatcher("dangnhap.jsp");

@@ -39,6 +39,7 @@ public class themsanphamController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		try {
+			thongkebo tkbo=new thongkebo();
 			loaiBo lb=new loaiBo();
 			ArrayList<loaiBean> dsloai=lb.getloai();
 			request.setAttribute("dsloai", dsloai);
@@ -60,12 +61,31 @@ public class themsanphamController extends HttpServlet {
 			//thông tin hãng mới
 			String mahang=request.getParameter("mahang");
 			String tenloai=request.getParameter("tenloai");
+			String dsloai1 = request.getParameter("dsloai1");
+			if(dsloai1!=null) {
+				request.setAttribute("dsloai1", dsloai1);
+			}
+			String dsloai2 = request.getParameter("dsloai2");
+			if(dsloai2!=null) {
+				request.setAttribute("dsloai2", dsloai2);
+			}
+			String maloai1 = request.getParameter("maloai1");
+			if(maloai1!=null) {
+				int check = tkbo.Checkdienthoai(maloai1);
+				if(check==0) {
+					tkbo.xoaloaidienthoai(maloai1);
+				}else {
+					tkbo.xoadienthoaitheomaloai(maloai1);
+					tkbo.xoaloaidienthoai(maloai1);
+				}
+			}
+			
 			//thông tin voucher
 			String maloaivoucher = request.getParameter("maloaivoucher");
 			String tenvoucher = request.getParameter("tenvoucher");
 			String  giatri=request.getParameter("giatri");
 			String soluongvc = request.getParameter("soluongvc");
-			thongkebo tkbo=new thongkebo();
+			
 			ArrayList<loaiVoucherbean> dsloaivoucher = tkbo.getloaivoucher();
 			request.setAttribute("dsloaivoucher", dsloaivoucher);
 			String vc = request.getParameter("vc");

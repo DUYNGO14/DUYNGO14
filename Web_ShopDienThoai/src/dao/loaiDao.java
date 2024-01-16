@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import bean.danhgiabean;
 import bean.dienThoaiBean;
 import bean.loaiBean;
 
@@ -41,6 +42,7 @@ public class loaiDao {
 		ps.close();
 		conn.close();
 	}
+	
 	public loaiBean TimMaLoai(String maloai) throws Exception{
 		try {
 			loaiBean l=new loaiBean();
@@ -59,13 +61,28 @@ public class loaiDao {
 		}
 		return null;
 	}
+	public String Tenloai(String maloai) throws Exception{
+		try {
+			String query="select tenloai from loai where maloai=?";
+			Connection conn = new KetNoi().getConnection();// mo ket noi voi sql
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setString(1, maloai);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				return rs.getString(1) ;
+			}
+			rs.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	public static void main(String[] args) {
 		try {
 			loaiDao l = new loaiDao();
 			ArrayList<loaiBean> ds = l.getloai();
-			
-			loaiBean lb=l.TimMaLoai("aaaaa");
-			System.out.println(lb);
+			System.out.println(l.Tenloai("ip"));
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

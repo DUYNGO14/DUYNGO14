@@ -29,6 +29,9 @@
 	href="/assets/owlcarousel/assets/owl.theme.default.min.css">
 <script src="/assets/vendors/jquery.min.js"></script>
 <script src="/assets/owlcarousel/owl.carousel.js"></script>
+<link rel="icon" type="image/png" sizes="16x16"  href="favicons/favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
 <title>Thông tin sản phẩm</title>
 </head>
 
@@ -37,7 +40,7 @@
 		<div class="container py-3">
 			<div class="row">
 				<div class="col-md-3 ">
-					<a href="HomeController"> <img src="image/logo.png"
+					<a href="HomeController"> <img src="image/logo5.png"
 						class="img-fluid " alt="Logo"></a>
 				</div>
 				<div class="col-md-2"></div>
@@ -132,7 +135,7 @@
 						<li class="nav-item "><a class="nav-link active text-white linkl" aria-current="page" href="HomeController">Trang chủ</a></li>
 						<li class="nav-item"><a class="nav-link text-white linkl position-relative" href="GioHangController">
 							<span>Giỏ hàng</span>
-							 <%
+							<%
 								if (session.getAttribute("gh") != null) {
 									giohangdao ghbo = (giohangdao) session.getAttribute("gh");
 							%>
@@ -141,7 +144,8 @@
                                    <%} %>
                                </span>
 						</a></li>
-						<!-- <li class="nav-item"><a class="nav-link text-white linkl" href="thanhtoan.jsp">Thanh Toán</a></li> -->
+						<li class="nav-item "><a class="nav-link active text-white linkl" aria-current="page" href="donhangController">Đơn hàng</a></li>
+						<li class="nav-item "><a class="nav-link active text-white linkl" aria-current="page" href="voucherController?vcb=vcb">Voucher</a></li>
 						<li class="nav-item"><a class="nav-link text-white linkl" href="LichSuMuaHangController">Lịch sử mua hàng</a></li>
 					</ul>
 				</div>
@@ -199,7 +203,7 @@
 						    <div class="col-md-8 ">
 						      <div class="card-body ml-2">
 						        <h5 class="card-title">${dienthoai.tendt}</h5>
-						        <p>Giá: ${dienthoai.gia}VNĐ</p>
+						        <p>Giá: ${gia}</p>
 						        <p>Kích thước màn:${dienthoai.kichthuocman}''</p>
 						        <p>Dung lượng pin:${dienthoai.pin}mAh</p>
 						        <p>Chip:${dienthoai.chip}</p>
@@ -237,6 +241,49 @@
 	              </div>
             	</div>
 			</div>
+			<!--Bình luận  -->
+		<div class="container mb-3">
+			<div class="row">
+			<!-- Bình luận -->
+				<div class="card col-md-6">
+				  <h5 class="card-header">Phản hồi sản phẩm</h5>
+				  <div class="card-body">
+				  <form action="ThongTinSanPhamConTroller" method="post">
+				  	  <select name="madtdg" class="form-select" aria-label="Default select example">
+						  <option value="${dienthoai.madt}">${dienthoai.tendt}</option>
+						</select>
+					  <div class="mb-3">
+					  	<textarea name="noidung" class="form-control" id="Textarea1" rows="4" placeholder="Viết đánh giá của bạn ở đây"></textarea>
+					  </div>
+					  <c:if test="${danhgia!=null}">
+					  	<p>Đã gửi đánh giá cho shop!</p>
+					  </c:if>
+					  <c:if test="${nd!=null}">
+					  	<p>Vui lòng nhập nội dung bình luận!</p>
+					  </c:if>
+				      <button type="submit" style="width: 100px;" class="btn btn-outline-primary">Gửi</button>
+				  </form>
+				  </div>
+				</div>
+				<div class="col-md-1"></div>
+				<!-- Lịch sử phản hồi sản phẩm -->
+				<div class="card col-md-5 " style="max-height: 300px;">
+				  <h5 class="card-header">Lịch sử phản hồi sản phẩm</h5>
+				  <div class="card-body">
+				  <c:if test="${dem==0}"><p>Không có đánh giá nào.</p></c:if>
+				  <c:if test="${dsdanhgia!=null}">
+					  <c:forEach items="${dsdanhgia}" var="o">
+					  	<p> <i class="fa-regular fa-comments text-primary"></i> 
+					  	<c:if test="${o.makh == makh}">(Bạn)</c:if>
+					  	${o.noidung}.
+					  	</p>
+					  </c:forEach>
+				</c:if>
+				  </div>
+				</div>
+			</div>
+			</div>
+			<!-- Gợi ý sản phẩm -->
 			<div class="product-list mb-3">
 		        <div class="product_title border-bottom">
 		          <div class="col-md-3 mx-5 my-3">
@@ -267,7 +314,7 @@
 			                </div>
 			                <div class="col-md-1 "></div>
 			                <div class="col-md-2 ">
-			                  <a href="GioHangController?mdt=${o.madt} &tendt=${o.tendt}&gia=${o.gia}&ram=${o.ram}&dl=${o.dungluong}&anh=${o.anh}"><i class="fa-solid fa-cart-plus fs-4 text-danger"></i></a>
+			                  <a href="GioHangController?mdt=${o.madt}&tendt=${o.tendt}&gia=${o.gia}&anh=${o.anh}&ktm=${o.kichthuocman}&pin=${o.pin}&dungluong=${o.dungluong}&ram=${o.ram}&chip=${o.chip}&maloai=${o.maloai}"><i class="fa-solid fa-cart-plus fs-4 text-danger"></i></a>
 			                </div>
 			              </div>
 			              <p class="fst-italic mb-2">Đánh giá</p>

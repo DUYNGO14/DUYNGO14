@@ -90,7 +90,17 @@ public class giohangdao {
 			}
 		}
 	}
+	public void deletetGiohang(String madt) throws Exception{
+		String query="delete from Giohang where madt=?";
+		Connection conn = new KetNoi().getConnection();//mo ket noi voi sql
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setString(1, madt);
+        ps.executeUpdate();
+        ps.close();
+        conn.close();
+	}
 	public void tru(String madt) throws Exception{
+		giohangdao ghdao=new giohangdao();
 		int n = ds.size();
 		for (int i = 0; i < n; i++) {
 			if(ds.get(i).getMadt().toLowerCase().trim().equals(madt.toLowerCase().trim())) {
@@ -99,10 +109,9 @@ public class giohangdao {
 					ds.get(i).setSoluong(a-1);
 					ds.get(i).setThanhtien(ds.get(i).getSoluong()*ds.get(i).getGia());
 					return;
-				}else { if(a==0){
+				}else{
 					Xoahang(madt);
 					deletetGiohang(madt);
-					}
 				}
 			}
 		}
@@ -141,15 +150,7 @@ public class giohangdao {
         ps.close();
         conn.close();
 	}
-	public void deletetGiohang(String madt) throws Exception{
-		String query="delete from Giohang where madt=?";
-		Connection conn = new KetNoi().getConnection();//mo ket noi voi sql
-        PreparedStatement ps = conn.prepareStatement(query);
-        ps.setString(1, madt);
-        ps.executeUpdate();
-        ps.close();
-        conn.close();
-	}
+	
 	public void deletetGiohang1(long makh) throws Exception{
 		String query="delete from Giohang where makh=?";
 		Connection conn = new KetNoi().getConnection();//mo ket noi voi sql

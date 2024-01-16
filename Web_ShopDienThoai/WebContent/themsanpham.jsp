@@ -29,6 +29,9 @@
 <script src="/assets/vendors/jquery.min.js"></script>
 <script src="/assets/owlcarousel/owl.carousel.js"></script>
 <link rel="stylesheet" href="css-jsp/add.css">
+<link rel="icon" type="image/png" sizes="16x16"  href="favicons/favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
 <title>Thêm sản phẩm</title>
 </head>
 <body>
@@ -36,7 +39,7 @@
 		<div class="container py-3">
 			<div class="row">
 				<div class="col-md-3 ">
-					<a href="HomeController"> <img src="image/logo.png"
+					<a href="HomeController"> <img src="image/logo5.png"
 						class="img-fluid " alt="Logo"></a>
 				</div>
 				<div class="col-md-2"></div>
@@ -141,12 +144,29 @@
 					          	<li><a class="dropdown-item" href="themsanphamController?vc=vc">Thêm voucher</a></li>
 					          </ul>
 					     </li>
+					     <li class="nav-item"><a class="nav-link text-white linkl" href="danhsachdanhgiaController">Đánh giá</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</section>
-	<c:if test="${themdt!=null or addt!=null }">
+	<!-- Điện thoại -->
+	<c:if test="${themdt!=null or addt!=null or add!=null }">
+	<section class="bread-crum">
+            <div class="container border-bottom border-danger mb-3">
+                <div class="row pt-3">
+                    <div class="col-12 a-left">
+                        <ul class="breadcrumb">
+                            <li class="home ">
+                                <a class="text-decoration-none" href="HomeController"><span class="text-dark">Trang chủ</span></a>
+                                <span class="mr_lr">&nbsp;/&nbsp;</span>
+                            </li>
+                            <li><span  class="text-warning">Thêm điện thoại mới</span></li>
+                        </ul>
+                    </div>
+                </div>
+               </div>
+        </section>
 	<section class="form-add">
 		<div class="container1">
 	      <h1 class="form-title">THÊM SẢN PHẨM MỚI</h1>
@@ -217,15 +237,33 @@
 	    </div>
 	</section>
 	</c:if>
-	<c:if test="${hang!=null or addh!=null}">
-	<!-- <section class="container ml-3">
+	<!-- Hãng -->
+	<c:if test="${hang!=null or addh!=null or dsloai2!=null or dsloai1!=null}">
+	
+	<section class="container ml-3">
 			<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
-			    <li class="breadcrumb-item"><a href="themsanphamController?ds=vc"><button type="button" class="btn btn-outline-danger btn-sm">Danh sách hãng điện thoại</button></a></li>
-			    <li class="breadcrumb-item"><a href="themsanphamController?vc=vc"><button type="button" class="btn btn-outline-danger btn-sm">Thêm hãng</button></a></li>
+			    <li class="breadcrumb-item"><a href="themsanphamController?dsloai1=vc"><button type="button" class="btn btn-outline-danger btn-sm">Danh sách hãng điện thoại</button></a></li>
+			    <li class="breadcrumb-item"><a href="themsanphamController?dsloai2=vc"><button type="button" class="btn btn-outline-danger btn-sm">Thêm hãng</button></a></li>
 			  </ol>
 			</nav>
-	</section> -->
+	</section>
+	<c:if test="${hang!=null or addh!=null or dsloai2!=null}">
+	<section class="bread-crum">
+            <div class="container border-bottom border-danger mb-3">
+                <div class="row pt-3">
+                    <div class="col-12 a-left">
+                        <ul class="breadcrumb">
+                            <li class="home ">
+                                <a class="text-decoration-none" href="HomeController"><span class="text-dark">Trang chủ</span></a>
+                                <span class="mr_lr">&nbsp;/&nbsp;</span>
+                            </li>
+                            <li><span  class="text-warning">Thêm hãng điện thoại mới</span></li>
+                        </ul>
+                    </div>
+                </div>
+               </div>
+    </section>
 	<section class="form-add"> 
 	     <div class="container1">
 	      <h1 class="form-title">THÊM HÃNG ĐIỆN THOẠI MỚI</h1>
@@ -255,7 +293,55 @@
 	    </div>
 	</section>
 	</c:if>
+	<c:if test="${dsloai1!=null}">
+	<section class="bread-crum">
+            <div class="container border-bottom border-danger mb-3">
+                <div class="row pt-3">
+                    <div class="col-12 a-left">
+                        <ul class="breadcrumb">
+                            <li class="home ">
+                                <a class="text-decoration-none" href="HomeController"><span class="text-dark">Trang chủ</span></a>
+                                <span class="mr_lr">&nbsp;/&nbsp;</span>
+                            </li>
+                            <li>
+                            	<a  class="text-decoration-none"  href="themsanphamController?dsloai2=vc"><span  class="text-warning">Thêm hãng điện thoại mới</span></a>
+                            	<span class="mr_lr">&nbsp;/&nbsp;</span>
+                            </li>
+                            <li><span  class="text-danger">Danh sách hãng điện thoại</span></li>
+                        </ul>
+                    </div>
+                </div>
+               </div>
+    </section>
+	<h2 class="text-center">Danh sách hãng điện thoại</h2>
+		<table class="table table-hover m-2">
+              <thead>
+                <tr>
+                	<th scope="col col-md">Mã loại của hãng</th>
+                  	<th scope="col col-md">Tên hãng điện thoại</th>
+                 	<th scope="col col-md">Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+             	<c:forEach items="${dsloai}" var="o">
+                 <tr>
+                 	<td><div class="my-2">${o.maloai}</div></td>
+                    <td><div class="my-2">${o.tenloai}</div></td>
+                   <td>
+    	 	 			<a href="themsanphamController?dsloai1=vc&maloai1=${o.maloai}"><button id="liveToastBtn" type=""button"" class="btn btn-primary">Delete</button></a>
+    	 	 			<a href="capnhatloaihangController?updateloai=vc&maloai2=${o.maloai}&tenloai2=${o.tenloai}"><button type="button" class="btn btn-primary">Update</button></a>
+					</td>
+                 </tr>
+               </c:forEach>
+              </tbody>
+         </table>
+	
+	</c:if>
+	</c:if>
+	
+	<!-- Voucher -->
 	<c:if test="${vc!=null or voucher!=null or dsvou!=null}">
+	
 		<section class="container ml-3">
 			<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
@@ -265,6 +351,21 @@
 			</nav>
 		</section>
 		<c:if test="${dsvou!=null}">
+		<section class="bread-crum">
+            <div class="container border-bottom border-danger mb-3">
+                <div class="row pt-3">
+                    <div class="col-12 a-left">
+                        <ul class="breadcrumb">
+                            <li class="home ">
+                                <a class="text-decoration-none" href="HomeController"><span class="text-dark">Trang chủ</span></a>
+                                <span class="mr_lr">&nbsp;/&nbsp;</span>
+                            </li>
+                            <li><span  class="text-warning">Danh sách voucher</span></li>
+                        </ul>
+                    </div>
+                </div>
+               </div>
+    </section>
 		<h2 class="text-center">Danh sách voucher</h2>
 		<table class="table table-hover m-2">
                         <thead>
@@ -289,7 +390,7 @@
 	                            <td><div class="my-2">Giảm phí vận chuyển</div></td>
 	                            </c:if>
 	                            <td>
-              	 	 				<a href="themsanphamController?ds=vc&mavoucher=${o.mavoucher}"><button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button></a>
+              	 	 				<a href="themsanphamController?ds=vc&mavoucher=${o.mavoucher}"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button></a>
                     			</td>
 	                          </tr>
 	                        </c:forEach>
@@ -297,6 +398,21 @@
                      </table>
 		</c:if>
 		<c:if test="${vc!=null or voucher!=null}">
+		<section class="bread-crum">
+            <div class="container border-bottom border-danger mb-3">
+                <div class="row pt-3">
+                    <div class="col-12 a-left">
+                        <ul class="breadcrumb">
+                            <li class="home ">
+                                <a class="text-decoration-none" href="HomeController"><span class="text-dark">Trang chủ</span></a>
+                                <span class="mr_lr">&nbsp;/&nbsp;</span>
+                            </li>
+                            <li><span  class="text-warning">Thêm voucher mới</span></li>
+                        </ul>
+                    </div>
+                </div>
+               </div>
+    </section>
 		<section class="form-add"> 
 	     <div class="container1">
 	      <h1 class="form-title">THÊM VOURCHER MỚI</h1>

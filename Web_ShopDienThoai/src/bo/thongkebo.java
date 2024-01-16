@@ -46,4 +46,22 @@ public class thongkebo {
 	public long checkVoucherMavorcher(long mavoucher1) throws Exception{
 		return tkdao.checkVoucherMavorcher(mavoucher1);
 	}
+	public int Checkdienthoai(String maloai) throws Exception{
+		return tkdao.Checkdienthoai(maloai);
+	}
+	public void xoadienthoaitheomaloai(String maloai) throws Exception{
+		tkdao.xoadienthoaitheomaloai(maloai);
+	}
+	public void xoaloaidienthoai(String maloai) throws Exception{
+		tkdao.xoaloaidienthoai(maloai);
+	}
+	public void updateloaidienthoai(String newtenloai,String maloai) throws Exception{
+		tkdao.updateloaidienthoai(newtenloai, maloai);
+	}
+	public void updatedienthoai(String tendt,long gia,double kichthuocman,long pin,String maloai,String chip,long ram,long dungluong,String anh,long soluong,String madt) throws Exception{
+		tkdao.updatedienthoai(tendt, gia, kichthuocman, pin, maloai, chip, ram, dungluong, anh, soluong, madt);
+	}
+	public String dinhdangtien(long l) throws Exception{
+		return tkdao.dinhdangtien(l);
+	}
 }
