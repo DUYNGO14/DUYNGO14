@@ -10,7 +10,6 @@
 ## 🧠 About Me
 
 - 🔭 Currently building **scalable web systems, payment flows & real-time applications**
-- 👯 Open to **Full-Stack, Web3, SaaS & Open-Source collaborations**
 - 🤝 Interested in **System Design, Performance Optimization & Distributed Systems**
 - 🌱 Learning **Advanced Backend, Cloud Architecture, WebSocket & On-chain Payment**
 - 💬 Ask me about **NestJS, Next.js, React Native, .NET, Database Design**
